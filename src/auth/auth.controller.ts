@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { LocalGuard } from './guards/local.guard';
 import { Request } from 'express';
 import { JwtGuard } from './guards/jwt.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
@@ -17,6 +18,7 @@ export class AuthController {
 
   @Get('me')
   @UseGuards(JwtGuard)
+  @ApiBearerAuth()
   async me(@Req() req: Request) {
     return req.user;
   }
