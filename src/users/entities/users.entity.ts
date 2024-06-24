@@ -10,6 +10,10 @@ export class Users extends BaseEntity {
   last_name: string;
 
   @Column()
+  @Unique(['username'])
+  username: string;
+
+  @Column()
   @Unique(['email'])
   email: string;
 

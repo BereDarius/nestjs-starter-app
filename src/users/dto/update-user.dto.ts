@@ -15,7 +15,7 @@ export class UpdateUserDto {
   @IsString()
   id: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'John' })
   @IsOptional()
   @IsNotEmpty()
   @IsString()
@@ -23,7 +23,7 @@ export class UpdateUserDto {
   @MaxLength(20)
   first_name?: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'Doe' })
   @IsOptional()
   @IsNotEmpty()
   @IsString()
@@ -31,14 +31,20 @@ export class UpdateUserDto {
   @MaxLength(20)
   last_name?: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'JohnDoe' })
+  @IsOptional()
+  @IsNotEmpty()
+  @IsString()
+  username?: string;
+
+  @ApiProperty({ example: 'john.doe@email.com' })
   @IsOptional()
   @IsNotEmpty()
   @IsString()
   @IsEmail()
   email?: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'password' })
   @IsOptional()
   @IsNotEmpty()
   @IsString()
@@ -46,7 +52,7 @@ export class UpdateUserDto {
   @MaxLength(20)
   password?: string;
 
-  @ApiProperty()
+  @ApiProperty({ enum: ['user', 'admin'] })
   @IsOptional()
   @IsNotEmpty()
   @IsEnum(['user', 'admin'])

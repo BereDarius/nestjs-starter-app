@@ -11,8 +11,10 @@ export class UsersService {
     private readonly usersRepository: Repository<Users>,
   ) {}
 
-  findOne(email: string): Promise<Users> {
-    return this.usersRepository.findOne({ where: { email } });
+  findOne(usernameOrEmail: string): Promise<Users> {
+    return this.usersRepository.findOne({
+      where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    });
   }
 
   create(createUserDto: CreateUserDto): Promise<Users> {

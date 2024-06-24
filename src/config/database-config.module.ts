@@ -16,6 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         autoLoadEntities: true,
         synchronize: configService.get('NODE_ENV') === 'development',
         ssl: true,
+        logging: configService.get('NODE_ENV') === 'development',
       }),
       inject: [ConfigService],
     }),
