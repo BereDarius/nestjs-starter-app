@@ -1,38 +1,58 @@
 import { Injectable } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
-
-const fakeUsers = [
-  {
-    id: '1',
-    username: 'admin',
-    password: 'admin',
-  },
-  {
-    id: '2',
-    username: 'user',
-    password: 'user',
-  },
-];
+import { UsersService } from 'src/users/users.service';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { encrypt, matchPassword } from 'src/lib/password-helpers';
 
 @Injectable()
 export class AuthService {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
-  validateUser(loginDto: LoginDto) {
-    const foundUser = fakeUsers.find(
-      (user) => user.username === loginDto.username,
-    );
+  async validateUser(loginDto: LoginDto) {
+    const foundUser = await this.usersService.findOne(loginDto.email);
 
     if (!foundUser) {
       return null;
     }
 
-    if (foundUser.password === loginDto.password) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password, ...user } = foundUser;
+    const isPasswordMatching = await matchPassword(
+      foundUser.password,
+      loginDto.password,
+    );
 
-      return this.jwtService.sign(user);
+    if (!isPasswordMatching) {
+      return null;
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...user } = foundUser;
+
+    return {
+      ...user,
+      access_token: this.jwtService.sign(user),
+    };
+  }
+
+  async register(createUserDto: CreateUserDto) {
+    const hashedPassword = await encrypt(createUserDto.password);
+
+    const user = {
+      ...createUserDto,
+      password: hashedPassword,
+    };
+
+    const newUser = await this.usersService.create(user);
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...result } = newUser;
+
+    return {
+      ...result,
+      access_token: this.jwtService.sign(result),
+    };
   }
 }
