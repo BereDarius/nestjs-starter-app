@@ -1,12 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { WinstonModule } from 'nest-winston';
+import { instance } from './logger/winston.logger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: WinstonModule.createLogger({
+      instance,
+    }),
+  });
 
   app.setGlobalPrefix('api');
 
+  // Swagger setup
   const config = new DocumentBuilder()
     .setTitle('TODO App API')
     .setDescription('The TODO App API description')
