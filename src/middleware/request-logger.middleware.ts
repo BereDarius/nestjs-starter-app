@@ -12,7 +12,7 @@ export class RequestLoggerMiddleware implements NestMiddleware {
 
     res.on('finish', () => {
       const statusCode = res.statusCode;
-      if (statusCode >= 400) {
+      if (statusCode >= 400 && statusCode < 500) {
         this.logger.warn(
           `[${req.method}] ${req.url} - ${req.get('user-agent')} ${req.ip} - ${statusCode} ${res.statusMessage}`,
         );
