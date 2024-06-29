@@ -42,9 +42,9 @@ export class CreateUserDto {
   @MaxLength(20)
   password: string;
 
-  @ApiProperty({ enum: ['user', 'admin'] })
+  @ApiProperty({ enum: ['USER', 'ADMIN'], default: 'USER' })
   @IsOptional()
   @IsNotEmpty()
-  @IsEnum(['user', 'admin'])
+  @IsEnum(['USER', 'ADMIN'])
   role?: string;
 }
