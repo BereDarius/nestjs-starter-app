@@ -15,9 +15,9 @@ export class TodosService {
     return this.todosRepository.save(createTodoDto);
   }
 
-  findAll(user_id: string | undefined) {
-    if (user_id) {
-      return this.todosRepository.find({ where: { user_id } });
+  findAll(userId: string | undefined) {
+    if (userId) {
+      return this.todosRepository.find({ where: { user_id: userId } });
     }
 
     return this.todosRepository.find();
@@ -27,7 +27,7 @@ export class TodosService {
     return this.todosRepository.findOne({ where: { id } });
   }
 
-  async update(id: string, updateTodoDto: UpdateTodoDto) {
+  update(id: string, updateTodoDto: UpdateTodoDto) {
     return this.todosRepository.save({ id, ...updateTodoDto });
   }
 

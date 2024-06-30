@@ -1,4 +1,4 @@
-import { ApiBearerAuth, ApiBody } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiResponse } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -27,12 +27,27 @@ export class AuthController {
   @Post('login')
   @UseGuards(LocalGuard)
   @ApiBody({ type: LoginDto })
+  @ApiResponse({
+    status: 200,
+    description: 'User logged in',
+  })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
   async login(@Req() request) {
     return request.user;
   }
 
   @Post('register')
-  async register(@Body() createUserDto: CreateUserDto) {
+  @ApiResponse({
+    status: 201,
+    description: 'User registered',
+  })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden' })
+  async register(@Req() request, @Body() createUserDto: CreateUserDto) {
+    if (request.user) {
+      throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+    }
+
     const foundUser = await this.usersService.findOne(createUserDto.username);
 
     if (foundUser) {
@@ -45,6 +60,11 @@ export class AuthController {
   @Get('me')
   @UseGuards(JwtGuard)
   @ApiBearerAuth()
+  @ApiResponse({
+    status: 200,
+    description: 'User found',
+  })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
   async me(@Req() request: Request) {
     return request.user;
   }
