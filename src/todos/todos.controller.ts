@@ -7,46 +7,116 @@ import {
   Param,
   Delete,
   UseGuards,
+  Req,
+  HttpException,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
-import { AccessGuard, Actions, UseAbility } from 'nest-casl';
-import { Todos } from './entities/todo.entity';
+import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from 'src/auth/enums/roles.enum';
+import { RoleGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('todos')
-@UseGuards(JwtGuard, AccessGuard)
+@UseGuards(JwtGuard)
+@ApiBearerAuth()
 export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
+  async getTodoOwnership(request, id) {
+    const { user } = request;
+
+    const todo = await this.todosService.findOne(id);
+
+    if (!todo) {
+      throw new HttpException('Not Found', 404);
+    }
+
+    if (
+      todo.user_id !== user.id &&
+      (user.role !== Role.ADMIN || user.role !== Role.MODERATOR)
+    ) {
+      console.log(todo.user_id, user.id);
+
+      throw new HttpException('Forbidden', 403);
+    }
+
+    return todo;
+  }
+
   @Post()
-  @UseAbility(Actions.create, Todos)
-  create(@Body() createTodoDto: CreateTodoDto) {
+  @Roles(Role.USER, Role.MODERATOR)
+  @ApiResponse({
+    status: 201,
+    description: 'Todo created',
+  })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden' })
+  create(@Req() request, @Body() createTodoDto: CreateTodoDto) {
+    const { user } = request;
+
+    if (user.role !== Role.ADMIN && user.role !== Role.MODERATOR) {
+      createTodoDto.user_id = user.id;
+    }
+
     return this.todosService.create(createTodoDto);
   }
 
   @Get()
-  @UseAbility(Actions.read, Todos)
-  findAll() {
-    return this.todosService.findAll();
+  @Roles(Role.USER, Role.MODERATOR)
+  @UseGuards(RoleGuard)
+  @ApiResponse({ status: 200, description: 'Todos found' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden' })
+  findAll(@Req() request) {
+    const { user } = request;
+
+    if (user.role === Role.ADMIN || user.role === Role.MODERATOR) {
+      return this.todosService.findAll(undefined);
+    }
+
+    return this.todosService.findAll(user.id);
   }
 
   @Get(':id')
-  @UseAbility(Actions.read, Todos)
-  findOne(@Param('id') id: string) {
-    return this.todosService.findOne(+id);
+  @Roles(Role.USER, Role.MODERATOR)
+  @ApiResponse({ status: 200, description: 'Todo found' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden' })
+  @ApiResponse({ status: 404, description: 'Not Found' })
+  async findOne(@Req() request, @Param('id') id: string) {
+    const todo = await this.getTodoOwnership(request, id);
+
+    return todo;
   }
 
   @Patch(':id')
-  @UseAbility(Actions.update, Todos)
-  update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
-    return this.todosService.update(+id, updateTodoDto);
+  @Roles(Role.USER, Role.MODERATOR)
+  @ApiResponse({ status: 200, description: 'Todo updated' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden' })
+  @ApiResponse({ status: 404, description: 'Not Found' })
+  async update(
+    @Req() request,
+    @Param('id') id: string,
+    @Body() updateTodoDto: UpdateTodoDto,
+  ) {
+    await this.getTodoOwnership(request, id);
+
+    return this.todosService.update(id, updateTodoDto);
   }
 
   @Delete(':id')
-  @UseAbility(Actions.delete, Todos)
-  remove(@Param('id') id: string) {
-    return this.todosService.remove(+id);
+  @Roles(Role.USER, Role.MODERATOR)
+  @ApiResponse({ status: 200, description: 'Todo removed' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Forbidden' })
+  @ApiResponse({ status: 404, description: 'Not Found' })
+  async remove(@Req() request, @Param('id') id: string) {
+    await this.getTodoOwnership(request, id);
+
+    return this.todosService.remove(id);
   }
 }

@@ -34,6 +34,6 @@ export class Users extends BaseEntity {
   @JoinColumn({ name: 'role', referencedColumnName: 'name' })
   role: string;
 
-  @OneToMany(() => Todos, (todo) => todo.user)
+  @OneToMany(() => Todos, (todo) => todo.user_id)
   todos: Todos[];
 }

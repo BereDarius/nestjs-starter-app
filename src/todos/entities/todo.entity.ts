@@ -1,5 +1,5 @@
 import { BaseEntity } from 'src/config/entities/base.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { TodoStatus } from './todo-status.entity';
 import { Users } from 'src/users/entities/users.entity';
 
@@ -16,8 +16,11 @@ export class Todos extends BaseEntity {
 
   @Column({ default: 'PENDING' })
   @ManyToOne(() => TodoStatus, (status) => status.todos)
+  @JoinColumn({ name: 'status', referencedColumnName: 'name' })
   status: string;
 
+  @Column()
   @ManyToOne(() => Users, (user) => user.todos, { onDelete: 'CASCADE' })
-  user: string;
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  user_id: string;
 }

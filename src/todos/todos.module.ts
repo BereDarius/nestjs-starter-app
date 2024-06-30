@@ -4,14 +4,10 @@ import { TodosController } from './todos.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Todos } from './entities/todo.entity';
 import { TodoStatus } from './entities/todo-status.entity';
-import { CaslModule } from 'nest-casl';
-import { permissions } from './permissions/todos.permissions';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Todos, TodoStatus]),
-    CaslModule.forFeature({ permissions }),
-  ],
+  imports: [TypeOrmModule.forFeature([Todos, TodoStatus]), AuthModule],
   controllers: [TodosController],
   providers: [TodosService],
 })

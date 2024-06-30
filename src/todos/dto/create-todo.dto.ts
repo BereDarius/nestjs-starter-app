@@ -15,4 +15,9 @@ export class CreateTodoDto {
 
   @ApiProperty({ example: '2024-06-29' })
   due_date: Date;
+
+  @ApiProperty({ example: 'PENDING' })
+  status: string;
+
+  user_id: string;
 }

@@ -20,4 +20,8 @@ export class UsersService {
   create(createUserDto: CreateUserDto): Promise<Users> {
     return this.usersRepository.save(createUserDto);
   }
+
+  update(id: string, updateUserDto: CreateUserDto): Promise<Users> {
+    return this.usersRepository.save({ id, ...updateUserDto });
+  }
 }
