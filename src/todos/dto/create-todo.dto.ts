@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import { TodoStatusEnum } from '../enums/todo-status.enum';
 
 export class CreateTodoDto {
   @ApiProperty({ example: 'Title' })
@@ -14,9 +21,21 @@ export class CreateTodoDto {
   description: string;
 
   @ApiProperty({ example: '2024-06-29' })
+  @IsDateString()
   due_date: Date;
 
-  @ApiProperty({ example: 'PENDING' })
+  @ApiProperty({
+    example: 'PENDING',
+    enum: [
+      TodoStatusEnum.PENDING,
+      TodoStatusEnum.IN_PROGRESS,
+      TodoStatusEnum.COMPLETED,
+      TodoStatusEnum.ON_HOLD,
+      TodoStatusEnum.CANCELLED,
+      TodoStatusEnum.OVERDUE,
+    ],
+  })
+  @IsString()
   status: string;
 
   user_id: string;

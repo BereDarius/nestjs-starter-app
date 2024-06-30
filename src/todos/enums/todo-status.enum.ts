@@ -1,0 +1,8 @@
+export enum TodoStatusEnum {
+  PENDING = 'PENDING', // Default
+  IN_PROGRESS = 'IN PROGRESS',
+  COMPLETED = 'COMPLETED',
+  ON_HOLD = 'ON HOLD',
+  CANCELLED = 'CANCELLED',
+  OVERDUE = 'OVERDUE',
+}

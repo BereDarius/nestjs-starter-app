@@ -3,19 +3,31 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { WinstonModule } from 'nest-winston';
 import { instance } from './logger/winston.logger';
-import { VersioningType } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
+    // Logger setup
     logger: WinstonModule.createLogger({
       instance,
     }),
   });
 
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
+
+  // Versioning setup
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: '1',
   });
+
+  // Global prefix setup
   app.setGlobalPrefix('api');
 
   // Swagger setup
@@ -28,6 +40,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
+  // Start the app
   await app.listen(3000);
 }
 bootstrap();

@@ -16,7 +16,7 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
-import { Role } from 'src/auth/enums/roles.enum';
+import { RoleEnum } from 'src/auth/enums/roles.enum';
 import { RoleGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('todos')
@@ -36,7 +36,7 @@ export class TodosController {
 
     if (
       todo.user_id !== user.id &&
-      (user.role !== Role.ADMIN || user.role !== Role.MODERATOR)
+      (user.role !== RoleEnum.ADMIN || user.role !== RoleEnum.MODERATOR)
     ) {
       console.log(todo.user_id, user.id);
 
@@ -47,7 +47,7 @@ export class TodosController {
   }
 
   @Post()
-  @Roles(Role.USER, Role.MODERATOR)
+  @Roles(RoleEnum.USER, RoleEnum.MODERATOR)
   @ApiResponse({
     status: 201,
     description: 'Todo created',
@@ -57,7 +57,7 @@ export class TodosController {
   create(@Req() request, @Body() createTodoDto: CreateTodoDto) {
     const { user } = request;
 
-    if (user.role !== Role.ADMIN && user.role !== Role.MODERATOR) {
+    if (user.role !== RoleEnum.ADMIN && user.role !== RoleEnum.MODERATOR) {
       createTodoDto.user_id = user.id;
     }
 
@@ -65,7 +65,7 @@ export class TodosController {
   }
 
   @Get()
-  @Roles(Role.USER, Role.MODERATOR)
+  @Roles(RoleEnum.USER, RoleEnum.MODERATOR)
   @UseGuards(RoleGuard)
   @ApiResponse({ status: 200, description: 'Todos found' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -73,7 +73,7 @@ export class TodosController {
   findAll(@Req() request) {
     const { user } = request;
 
-    if (user.role === Role.ADMIN || user.role === Role.MODERATOR) {
+    if (user.role === RoleEnum.ADMIN || user.role === RoleEnum.MODERATOR) {
       return this.todosService.findAll(undefined);
     }
 
@@ -81,7 +81,7 @@ export class TodosController {
   }
 
   @Get(':id')
-  @Roles(Role.USER, Role.MODERATOR)
+  @Roles(RoleEnum.USER, RoleEnum.MODERATOR)
   @ApiResponse({ status: 200, description: 'Todo found' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -93,7 +93,7 @@ export class TodosController {
   }
 
   @Patch(':id')
-  @Roles(Role.USER, Role.MODERATOR)
+  @Roles(RoleEnum.USER, RoleEnum.MODERATOR)
   @ApiResponse({ status: 200, description: 'Todo updated' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Forbidden' })
@@ -109,7 +109,7 @@ export class TodosController {
   }
 
   @Delete(':id')
-  @Roles(Role.USER, Role.MODERATOR)
+  @Roles(RoleEnum.USER, RoleEnum.MODERATOR)
   @ApiResponse({ status: 200, description: 'Todo removed' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Forbidden' })

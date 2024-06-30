@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Role } from './enums/roles.enum';
+import { RoleEnum } from './enums/roles.enum';
 
 interface IsAuthorizedParams {
-  currentRole: Role;
-  requiredRole: Role;
+  currentRole: RoleEnum;
+  requiredRole: RoleEnum;
 }
 
 @Injectable()
@@ -12,11 +12,11 @@ export class AccessContorlService {
   private priority: number = 1;
 
   constructor() {
-    this.buildRoles([Role.GUEST, Role.USER, Role.ADMIN]);
-    this.buildRoles([Role.MODERATOR, Role.ADMIN]);
+    this.buildRoles([RoleEnum.GUEST, RoleEnum.USER, RoleEnum.ADMIN]);
+    this.buildRoles([RoleEnum.MODERATOR, RoleEnum.ADMIN]);
   }
 
-  private buildRoles(roles: Role[]) {
+  private buildRoles(roles: RoleEnum[]) {
     const hierarchy: Map<string, number> = new Map();
     roles.forEach((role) => {
       hierarchy.set(role, this.priority);
