@@ -27,8 +27,8 @@ export class AuthController {
   @Post('login')
   @UseGuards(LocalGuard)
   @ApiBody({ type: LoginDto })
-  async login(@Req() req) {
-    return req.user;
+  async login(@Req() request) {
+    return request.user;
   }
 
   @Post('register')
@@ -45,7 +45,7 @@ export class AuthController {
   @Get('me')
   @UseGuards(JwtGuard)
   @ApiBearerAuth()
-  async me(@Req() req: Request) {
-    return req.user;
+  async me(@Req() request: Request) {
+    return request.user;
   }
 }

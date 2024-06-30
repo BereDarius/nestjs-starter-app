@@ -6,6 +6,7 @@ import {
   MaxLength,
   MinLength,
   IsEmail,
+  IsStrongPassword,
 } from 'class-validator';
 import { RoleEnum } from 'src/auth/enums/roles.enum';
 
@@ -13,14 +14,14 @@ export class CreateUserDto {
   @ApiProperty({ example: 'John' })
   @IsNotEmpty()
   @IsString()
-  @MinLength(5)
+  @MinLength(2)
   @MaxLength(20)
   first_name: string;
 
   @ApiProperty({ example: 'Doe' })
   @IsNotEmpty()
   @IsString()
-  @MinLength(5)
+  @MinLength(2)
   @MaxLength(20)
   last_name: string;
 
@@ -37,11 +38,12 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
-  @ApiProperty({ example: 'password' })
+  @ApiProperty({ example: 'Password123@' })
   @IsNotEmpty()
   @IsString()
   @MinLength(8)
   @MaxLength(20)
+  @IsStrongPassword()
   password: string;
 
   @ApiProperty({ example: 'USER', enum: RoleEnum })
