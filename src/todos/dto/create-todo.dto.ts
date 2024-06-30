@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDateString,
+  IsEnum,
   IsNotEmpty,
   IsString,
   MaxLength,
@@ -26,16 +27,9 @@ export class CreateTodoDto {
 
   @ApiProperty({
     example: 'PENDING',
-    enum: [
-      TodoStatusEnum.PENDING,
-      TodoStatusEnum.IN_PROGRESS,
-      TodoStatusEnum.COMPLETED,
-      TodoStatusEnum.ON_HOLD,
-      TodoStatusEnum.CANCELLED,
-      TodoStatusEnum.OVERDUE,
-    ],
+    enum: TodoStatusEnum,
   })
-  @IsString()
+  @IsEnum(TodoStatusEnum)
   status: string;
 
   user_id: string;
