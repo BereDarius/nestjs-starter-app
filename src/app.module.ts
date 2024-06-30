@@ -9,6 +9,8 @@ import { TodosModule } from './todos/todos.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 
+console.log('HELLO');
+
 @Module({
   imports: [
     ThrottlerModule.forRoot([
