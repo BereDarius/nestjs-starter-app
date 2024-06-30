@@ -1,4 +1,3 @@
-import { BaseEntity } from 'src/config/entities/base.entity';
 import {
   Column,
   Entity,
@@ -7,6 +6,7 @@ import {
   OneToMany,
   Unique,
 } from 'typeorm';
+import { BaseEntity } from 'src/config/entities/base.entity';
 import { Roles } from '../../auth/entities/roles.entity';
 import { Todos } from 'src/todos/entities/todo.entity';
 

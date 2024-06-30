@@ -1,5 +1,5 @@
-import { BaseEntity } from 'src/config/entities/base.entity';
 import { Column, Entity, OneToMany, Unique } from 'typeorm';
+import { BaseEntity } from 'src/config/entities/base.entity';
 import { Todos } from './todo.entity';
 
 @Entity()

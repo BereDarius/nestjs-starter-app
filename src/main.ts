@@ -1,12 +1,12 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { WinstonModule } from 'nest-winston';
-import { instance } from './logger/winston.logger';
-import { ValidationPipe, VersioningType } from '@nestjs/common';
-import helmet from 'helmet';
-import * as cookieParser from 'cookie-parser';
 import * as compression from 'compression';
+import * as cookieParser from 'cookie-parser';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { AppModule } from './app.module';
+import helmet from 'helmet';
+import { instance } from './logger/winston.logger';
+import { NestFactory } from '@nestjs/core';
+import { WinstonModule } from 'nest-winston';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

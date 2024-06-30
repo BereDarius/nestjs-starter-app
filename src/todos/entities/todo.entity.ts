@@ -1,5 +1,5 @@
-import { BaseEntity } from 'src/config/entities/base.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { BaseEntity } from 'src/config/entities/base.entity';
 import { TodoStatus } from './todo-status.entity';
 import { Users } from 'src/users/entities/users.entity';
 

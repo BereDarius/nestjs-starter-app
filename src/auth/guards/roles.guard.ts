@@ -1,9 +1,9 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
+import { AccessContorlService } from '../access-control.service';
 import { Observable } from 'rxjs';
+import { Reflector } from '@nestjs/core';
 import { ROLE_KEY } from '../decorators/roles.decorator';
 import { RoleEnum } from '../enums/roles.enum';
-import { AccessContorlService } from '../access-control.service';
 
 export class TokenDto {
   id: number;

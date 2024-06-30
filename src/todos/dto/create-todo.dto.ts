@@ -1,4 +1,3 @@
-import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDateString,
   IsEnum,
@@ -7,6 +6,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 import { TodoStatusEnum } from '../enums/todo-status.enum';
 
 export class CreateTodoDto {

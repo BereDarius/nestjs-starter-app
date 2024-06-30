@@ -1,23 +1,23 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UseGuards,
-  Req,
-  HttpException,
-} from '@nestjs/common';
-import { TodosService } from './todos.service';
-import { CreateTodoDto } from './dto/create-todo.dto';
-import { UpdateTodoDto } from './dto/update-todo.dto';
-import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
-import { Roles } from 'src/auth/decorators/roles.decorator';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  Param,
+  Patch,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
+import { CreateTodoDto } from './dto/create-todo.dto';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { RoleEnum } from 'src/auth/enums/roles.enum';
 import { RoleGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { TodosService } from './todos.service';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Controller('todos')
 @UseGuards(JwtGuard)
