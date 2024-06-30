@@ -9,6 +9,7 @@ import {
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { RoleEnum } from 'src/auth/enums/roles.enum';
+import { Transform } from 'class-transformer';
 
 export class CreateUserDto {
   @ApiProperty({ example: 'John' })
@@ -16,6 +17,7 @@ export class CreateUserDto {
   @IsString()
   @MinLength(2)
   @MaxLength(20)
+  @Transform(({ value }) => value.trim())
   first_name: string;
 
   @ApiProperty({ example: 'Doe' })
@@ -23,6 +25,7 @@ export class CreateUserDto {
   @IsString()
   @MinLength(2)
   @MaxLength(20)
+  @Transform(({ value }) => value.trim())
   last_name: string;
 
   @ApiProperty({ example: 'JohnDoe' })
@@ -30,12 +33,14 @@ export class CreateUserDto {
   @IsString()
   @MinLength(5)
   @MaxLength(20)
+  @Transform(({ value }) => value.trim())
   username: string;
 
   @ApiProperty({ example: 'john.doe@email.com' })
   @IsNotEmpty()
   @IsString()
   @IsEmail()
+  @Transform(({ value }) => value.trim().toLowerCase())
   email: string;
 
   @ApiProperty({ example: 'Password123@' })
@@ -48,5 +53,6 @@ export class CreateUserDto {
 
   @ApiProperty({ example: 'USER', enum: RoleEnum })
   @IsEnum(RoleEnum)
+  @Transform(({ value }) => value.trim().toUpperCase())
   role?: string;
 }

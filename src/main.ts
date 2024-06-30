@@ -1,5 +1,6 @@
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
+import * as fs from 'fs';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { AppModule } from './app.module';
@@ -9,7 +10,15 @@ import { NestFactory } from '@nestjs/core';
 import { WinstonModule } from 'nest-winston';
 
 async function bootstrap() {
+  // HTTPS options
+  const httpsOptions = {
+    key: fs.readFileSync('./secrets/private-key.pem').toString(),
+    cert: fs.readFileSync('./secrets/public-certificate.pem').toString(),
+  };
+
   const app = await NestFactory.create(AppModule, {
+    // HTTPS setup
+    httpsOptions,
     // Logger setup
     logger: WinstonModule.createLogger({
       instance,
@@ -46,6 +55,7 @@ async function bootstrap() {
     .setDescription('The TODO App API description')
     .setVersion('1.0')
     .addBearerAuth()
+    .setLicense('MIT', 'https://opensource.org/licenses/MIT')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
