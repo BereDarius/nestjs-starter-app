@@ -6,16 +6,30 @@ import { DatabaseConfigModule } from './config/database-config.module';
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { RequestLoggerMiddleware } from './middleware/request-logger.middleware';
 import { TodosModule } from './todos/todos.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 1000,
+      },
+    ]),
     AppConfigModule,
     DatabaseConfigModule,
     AuthModule,
     UsersModule,
     TodosModule,
   ],
-  providers: [Logger],
+  providers: [
+    Logger,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
