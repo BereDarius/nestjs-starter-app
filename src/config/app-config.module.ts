@@ -14,7 +14,6 @@ import * as Joi from 'joi';
         LOG_LEVEL: Joi.string()
           .valid('error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly')
           .default('info'),
-        CSRF_SECRET: Joi.string().required(),
 
         DB_HOST: Joi.string().required().default('localhost'),
         DB_PORT: Joi.number().default(5432),
