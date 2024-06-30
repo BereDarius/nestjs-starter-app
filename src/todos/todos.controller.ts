@@ -38,8 +38,6 @@ export class TodosController {
       todo.user_id !== user.id &&
       (user.role !== RoleEnum.ADMIN || user.role !== RoleEnum.MODERATOR)
     ) {
-      console.log(todo.user_id, user.id);
-
       throw new HttpException('Forbidden', 403);
     }
 

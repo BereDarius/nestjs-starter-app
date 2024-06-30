@@ -4,6 +4,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { WinstonModule } from 'nest-winston';
 import { instance } from './logger/winston.logger';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
+import helmet from 'helmet';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -13,6 +15,13 @@ async function bootstrap() {
     }),
   });
 
+  // Cookie parser setup
+  app.use(cookieParser());
+
+  // CORS setup
+  app.enableCors();
+
+  // Validation setup
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -39,6 +48,9 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+
+  // Helmet setup
+  app.use(helmet());
 
   // Start the app
   await app.listen(3000);

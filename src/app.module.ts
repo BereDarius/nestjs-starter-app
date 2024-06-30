@@ -20,6 +20,9 @@ import { TodosModule } from './todos/todos.module';
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(RequestLoggerMiddleware).forRoutes('*');
+    Logger.log('RequestLoggerMiddleware applied');
+
     consumer.apply(AuthMiddleware);
+    Logger.log('AuthMiddleware applied');
   }
 }
