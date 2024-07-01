@@ -9,6 +9,8 @@ import { instance } from './logger/winston.logger';
 import { NestFactory } from '@nestjs/core';
 import { WinstonModule } from 'nest-winston';
 
+declare const module: any;
+
 async function bootstrap() {
   // HTTPS options
   const httpsOptions = {
@@ -68,5 +70,10 @@ async function bootstrap() {
 
   // Start the app
   await app.listen(3000);
+
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 }
 bootstrap();
