@@ -5,6 +5,7 @@ import { AppConfigModule } from './config/app-config.module';
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { AuthModule } from './auth/auth.module';
 import { DatabaseConfigModule } from './config/database-config.module';
+import { HealthModule } from './health/health.module';
 import { RequestLoggerMiddleware } from './middleware/request-logger.middleware';
 import { TodosModule } from './todos/todos.module';
 import { UsersModule } from './users/users.module';
@@ -22,6 +23,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     UsersModule,
     TodosModule,
+    HealthModule,
   ],
   providers: [
     Logger,
