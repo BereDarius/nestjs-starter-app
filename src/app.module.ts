@@ -1,5 +1,6 @@
 import { Logger, MiddlewareConsumer, Module } from '@nestjs/common';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { AdminModule } from './admin/admin.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AppConfigModule } from './config/app-config.module';
 import { AuthMiddleware } from './middleware/auth.middleware';
@@ -24,6 +25,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     TodosModule,
     HealthModule,
+    AdminModule,
   ],
   providers: [
     Logger,

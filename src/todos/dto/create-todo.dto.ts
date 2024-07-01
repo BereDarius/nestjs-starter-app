@@ -1,3 +1,4 @@
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 import {
   IsDateString,
   IsEnum,
@@ -7,7 +8,6 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
 import { TodoStatusEnum } from '../enums/todo-status.enum';
 import { Transform } from 'class-transformer';
 
@@ -38,6 +38,7 @@ export class CreateTodoDto {
   @Transform(({ value }) => value.trim().toUpperCase())
   status: string;
 
+  @ApiHideProperty()
   @IsUUID()
   user_id: string;
 }

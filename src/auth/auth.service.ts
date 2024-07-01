@@ -1,19 +1,30 @@
 import { encrypt, matchPassword } from 'src/lib/password-helpers';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { FindOptionsWhere } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto';
+import { UpdateUserDto } from 'src/users/dto/update-user.dto';
+import { Users } from 'src/users/entities/users.entity';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
-    private jwtService: JwtService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async validateUser(loginDto: LoginDto) {
-    const foundUser = await this.usersService.findOne(loginDto.username);
+    const where: FindOptionsWhere<Users>[] = [
+      {
+        username: loginDto.username,
+      },
+      { email: loginDto.username },
+    ];
+
+    const foundUsers = await this.usersService.findAll(where);
+    const foundUser = foundUsers[0];
 
     if (!foundUser) {
       return null;
@@ -54,5 +65,15 @@ export class AuthService {
       ...result,
       access_token: this.jwtService.sign(result),
     };
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const updateUserDtoCopy = { ...updateUserDto };
+
+    if (updateUserDto.password) {
+      updateUserDtoCopy.password = await encrypt(updateUserDto.password);
+    }
+
+    return this.usersService.update(id, updateUserDtoCopy);
   }
 }

@@ -1,4 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import {
   DiskHealthIndicator,
   HealthCheck,
@@ -6,7 +7,14 @@ import {
   MemoryHealthIndicator,
   TypeOrmHealthIndicator,
 } from '@nestjs/terminus';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
+import { RoleEnum } from 'src/auth/enums/roles.enum';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
+@ApiTags('Health Checks')
+@UseGuards(JwtGuard)
+@Roles(RoleEnum.ADMIN)
+@ApiBearerAuth()
 @Controller('health')
 export class HealthController {
   constructor(

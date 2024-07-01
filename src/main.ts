@@ -4,9 +4,12 @@ import * as fs from 'fs';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { AppModule } from './app.module';
+import { AuthModule } from './auth/auth.module';
 import helmet from 'helmet';
 import { instance } from './logger/winston.logger';
 import { NestFactory } from '@nestjs/core';
+import { TodosModule } from './todos/todos.module';
+import { UsersModule } from './users/users.module';
 import { WinstonModule } from 'nest-winston';
 
 declare const module: any;
@@ -52,15 +55,27 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   // Swagger setup
-  const config = new DocumentBuilder()
+  const swaggerConfig = new DocumentBuilder()
     .setTitle('TODO App API')
-    .setDescription('The TODO App API description')
+    .setDescription('Starter code for an API using NestJS')
     .setVersion('1.0')
     .addBearerAuth()
     .setLicense('MIT', 'https://opensource.org/licenses/MIT')
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, swaggerConfig, {
+    include: [AuthModule, TodosModule, UsersModule],
+  });
   SwaggerModule.setup('api', app, document);
+
+  const adminSwaggerConfig = new DocumentBuilder()
+    .setTitle('TODO App API (Admin)')
+    .setDescription('Starter code for an API using NestJS')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .setLicense('MIT', 'https://opensource.org/licenses/MIT')
+    .build();
+  const adminDocument = SwaggerModule.createDocument(app, adminSwaggerConfig);
+  SwaggerModule.setup('api/admin', app, adminDocument);
 
   // Compression setup
   app.use(compression());
