@@ -15,12 +15,12 @@ export class Todos extends BaseEntity {
   due_date: Date;
 
   @Column({ default: 'PENDING' })
-  @ManyToOne(() => TodoStatus, (status) => status.todos)
+  @ManyToOne(() => TodoStatus, status => status.todos)
   @JoinColumn({ name: 'status', referencedColumnName: 'name' })
   status: string;
 
   @Column()
-  @ManyToOne(() => Users, (user) => user.todos, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Users, user => user.todos, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user_id: string;
 }

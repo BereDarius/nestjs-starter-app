@@ -7,17 +7,13 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Injectable()
 export class TodosService {
-  constructor(
-    @InjectRepository(Todos) private todosRepository: Repository<Todos>,
-  ) {}
+  constructor(@InjectRepository(Todos) private todosRepository: Repository<Todos>) {}
 
   create(createTodoDto: CreateTodoDto): Promise<Todos> {
     return this.todosRepository.save(createTodoDto);
   }
 
-  findAll(
-    where: FindOptionsWhere<Todos> | FindOptionsWhere<Todos>[],
-  ): Promise<Todos[]> {
+  findAll(where: FindOptionsWhere<Todos> | FindOptionsWhere<Todos>[]): Promise<Todos[]> {
     return this.todosRepository.find({ where });
   }
 

@@ -97,11 +97,7 @@ export class TodosController {
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Unauthorized' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Not Found' })
-  async update(
-    @Req() request,
-    @Param('id') id: string,
-    @Body() updateTodoDto: UpdateTodoDto,
-  ) {
+  async update(@Req() request, @Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
     await this.getTodoOwnership(request, id);
 
     return this.todosService.update(id, updateTodoDto);

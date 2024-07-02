@@ -18,7 +18,7 @@ export class AccessContorlService {
 
   private buildRoles(roles: RoleEnum[]) {
     const hierarchy: Map<string, number> = new Map();
-    roles.forEach((role) => {
+    roles.forEach(role => {
       hierarchy.set(role, this.priority);
       this.priority++;
     });

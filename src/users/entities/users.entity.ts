@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  Unique,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, Unique } from 'typeorm';
 import { BaseEntity } from 'src/config/entities/base.entity';
 import { Roles } from '../../auth/entities/roles.entity';
 import { Todos } from 'src/todos/entities/todo.entity';
@@ -30,10 +23,10 @@ export class Users extends BaseEntity {
   password: string;
 
   @Column({ default: 'USER' })
-  @ManyToOne(() => Roles, (role) => role.users)
+  @ManyToOne(() => Roles, role => role.users)
   @JoinColumn({ name: 'role', referencedColumnName: 'name' })
   role: string;
 
-  @OneToMany(() => Todos, (todo) => todo.user_id)
+  @OneToMany(() => Todos, todo => todo.user_id)
   todos: Todos[];
 }

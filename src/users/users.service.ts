@@ -16,9 +16,7 @@ export class UsersService {
     return this.usersRepository.save(createUserDto);
   }
 
-  findAll(
-    where: FindOptionsWhere<Users> | FindOptionsWhere<Users>[],
-  ): Promise<Users[]> {
+  findAll(where: FindOptionsWhere<Users> | FindOptionsWhere<Users>[]): Promise<Users[]> {
     return this.usersRepository.find({ where });
   }
 
@@ -26,10 +24,7 @@ export class UsersService {
     return this.usersRepository.findOne({ where: { id } });
   }
 
-  async update(
-    id: string,
-    updateUserDto: UpdateUserDto,
-  ): Promise<Partial<Users>> {
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<Partial<Users>> {
     const updatedUser = await this.usersRepository.save({
       id,
       ...updateUserDto,

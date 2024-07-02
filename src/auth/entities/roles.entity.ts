@@ -8,6 +8,6 @@ export class Roles extends BaseEntity {
   @Unique(['name'])
   name: string;
 
-  @OneToMany(() => Users, (user) => user.role)
+  @OneToMany(() => Users, user => user.role)
   users: Users[];
 }

@@ -6,9 +6,7 @@ export class RequestLoggerMiddleware implements NestMiddleware {
   constructor(private logger: Logger) {}
 
   use(req: Request, res: Response, next: NextFunction) {
-    this.logger.log(
-      `[${req.method}] ${req.originalUrl} - ${req.get('user-agent')} ${req.ip}`,
-    );
+    this.logger.log(`[${req.method}] ${req.originalUrl} - ${req.get('user-agent')} ${req.ip}`);
 
     res.on('finish', () => {
       const statusCode = res.statusCode;

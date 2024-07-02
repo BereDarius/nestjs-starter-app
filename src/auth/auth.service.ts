@@ -30,10 +30,7 @@ export class AuthService {
       return null;
     }
 
-    const isPasswordMatching = await matchPassword(
-      foundUser.password,
-      loginDto.password,
-    );
+    const isPasswordMatching = await matchPassword(foundUser.password, loginDto.password);
 
     if (!isPasswordMatching) {
       return null;

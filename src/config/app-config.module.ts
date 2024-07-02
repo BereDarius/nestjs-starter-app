@@ -7,9 +7,7 @@ import { Module } from '@nestjs/common';
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         PORT: Joi.number().port().default(3000),
-        NODE_ENV: Joi.string()
-          .valid('development', 'production', 'test')
-          .default('development'),
+        NODE_ENV: Joi.string().valid('development', 'production', 'test').default('development'),
         JWT_SECRET: Joi.string().required().default('secret'),
         LOG_LEVEL: Joi.string()
           .valid('error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly')

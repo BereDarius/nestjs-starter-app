@@ -11,6 +11,6 @@ export class TodoStatus extends BaseEntity {
   @Column()
   description: string;
 
-  @OneToMany(() => Todos, (todo) => todo.status)
+  @OneToMany(() => Todos, todo => todo.status)
   todos: Todos[];
 }

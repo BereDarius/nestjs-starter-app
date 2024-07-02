@@ -8,9 +8,6 @@ export const encrypt = async (plainTextPassword: string) => {
   return hashedPassword;
 };
 
-export const matchPassword = async (
-  hashedPassword: string,
-  plainTextPassword: string,
-) => {
+export const matchPassword = async (hashedPassword: string, plainTextPassword: string) => {
   return await compare(plainTextPassword, hashedPassword);
 };
