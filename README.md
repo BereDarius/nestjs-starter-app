@@ -258,6 +258,8 @@ In order to generate documentation using Compodoc, you can run the following com
 $ yarn doc
 ```
 
+This will generate a `documentation` folder and start a local server at `http://localhost:8080`.
+
 ## Contributing
 
 Contributions are welcome! If you have any suggestions or improvements, feel free to open an issue or submit a pull request.
