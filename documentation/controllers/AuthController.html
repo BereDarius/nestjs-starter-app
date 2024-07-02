@@ -147,6 +147,15 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Async</span>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Async</span>
                                 <a href="#login" >login</a>
                             </li>
                             <li>
@@ -166,6 +175,15 @@
                                     <span class="modifier">Async</span>
                                 <a href="#register" >register</a>
                             </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Async</span>
+                                <a href="#update" >update</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -183,6 +201,83 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Async</span>
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>delete(request)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Delete(&#x27;me&#x27;)<br />@UseGuards(JwtGuard)<br />@ApiBearerAuth()<br />@ApiResponse({status: undefined, description: &#x27;User deleted&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Unauthorized&#x27;})<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/auth/auth.controller.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -211,14 +306,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post(&#x27;login&#x27;)<br />@UseGuards(LocalGuard)<br />@ApiBody({type: LoginDto})<br />@ApiResponse({status: 200, description: &#x27;User logged in&#x27;})<br />@ApiResponse({status: 401, description: &#x27;Unauthorized&#x27;})<br /></code>
+                    <code>@Post(&#x27;login&#x27;)<br />@UseGuards(LocalGuard)<br />@ApiBody({type: LoginDto})<br />@ApiResponse({status: undefined, description: &#x27;User logged in&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Unauthorized&#x27;})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/auth/auth.controller.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/auth/auth.controller.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -288,14 +383,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;me&#x27;)<br />@UseGuards(JwtGuard)<br />@ApiBearerAuth()<br />@ApiResponse({status: 200, description: &#x27;User found&#x27;})<br />@ApiResponse({status: 401, description: &#x27;Unauthorized&#x27;})<br /></code>
+                    <code>@Get(&#x27;me&#x27;)<br />@UseGuards(JwtGuard)<br />@ApiBearerAuth()<br />@ApiResponse({status: undefined, description: &#x27;User found&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Unauthorized&#x27;})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/auth/auth.controller.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/auth/auth.controller.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -368,7 +463,7 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post(&#x27;register&#x27;)<br />@ApiResponse({status: 201, description: &#x27;User registered&#x27;})<br />@ApiResponse({status: 401, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: 403, description: &#x27;Forbidden&#x27;})<br /></code>
+                    <code>@Post(&#x27;register&#x27;)<br />@ApiResponse({status: undefined, description: &#x27;User registered&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Forbidden&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Conflict&#x27;})<br /></code>
                 </td>
             </tr>
 
@@ -432,29 +527,127 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="update"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Async</span>
+                        <span ><b>update</b></span>
+                        <a href="#update"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>update(request, updateUserDto: <a href="../classes/UpdateUserDto.html" target="_self">UpdateUserDto</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Patch(&#x27;me&#x27;)<br />@UseGuards(JwtGuard)<br />@ApiBearerAuth()<br />@ApiResponse({status: undefined, description: &#x27;User updated&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Unauthorized&#x27;})<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/auth/auth.controller.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>request</td>
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>updateUserDto</td>
+                                            <td>
+                                                            <code><a href="../classes/UpdateUserDto.html" target="_self" >UpdateUserDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiBearerAuth, ApiBody, ApiResponse } from &#x27;@nestjs/swagger&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from &#x27;@nestjs/swagger&#x27;;
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
+  Patch,
   Post,
   Req,
   UseGuards,
 } from &#x27;@nestjs/common&#x27;;
 import { AuthService } from &#x27;./auth.service&#x27;;
 import { CreateUserDto } from &#x27;src/users/dto/create-user.dto&#x27;;
+import { FindOptionsWhere } from &#x27;typeorm&#x27;;
 import { JwtGuard } from &#x27;./guards/jwt.guard&#x27;;
 import { LocalGuard } from &#x27;./guards/local.guard&#x27;;
 import { LoginDto } from &#x27;./dto/login.dto&#x27;;
 import { Request } from &#x27;express&#x27;;
+import { UpdateUserDto } from &#x27;src/users/dto/update-user.dto&#x27;;
+import { Users } from &#x27;src/users/entities/users.entity&#x27;;
 import { UsersService } from &#x27;src/users/users.service&#x27;;
 
+@ApiTags(&#x27;Auth&#x27;)
 @Controller(&#x27;auth&#x27;)
 export class AuthController {
   constructor(
@@ -465,30 +658,30 @@ export class AuthController {
   @Post(&#x27;login&#x27;)
   @UseGuards(LocalGuard)
   @ApiBody({ type: LoginDto })
-  @ApiResponse({
-    status: 200,
-    description: &#x27;User logged in&#x27;,
-  })
-  @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
+  @ApiResponse({ status: HttpStatus.CREATED, description: &#x27;User logged in&#x27; })
+  @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: &#x27;Unauthorized&#x27; })
   async login(@Req() request) {
     return request.user;
   }
 
   @Post(&#x27;register&#x27;)
-  @ApiResponse({
-    status: 201,
-    description: &#x27;User registered&#x27;,
-  })
-  @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
-  @ApiResponse({ status: 403, description: &#x27;Forbidden&#x27; })
+  @ApiResponse({ status: HttpStatus.CREATED, description: &#x27;User registered&#x27; })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: &#x27;Forbidden&#x27; })
+  @ApiResponse({ status: HttpStatus.CONFLICT, description: &#x27;Conflict&#x27; })
   async register(@Req() request, @Body() createUserDto: CreateUserDto) {
     if (request.user) {
       throw new HttpException(&#x27;Forbidden&#x27;, HttpStatus.FORBIDDEN);
     }
 
-    const foundUser &#x3D; await this.usersService.findOne(createUserDto.username);
+    const where: FindOptionsWhere&lt;Users&gt;[] &#x3D; [
+      { username: createUserDto.username },
+      { email: createUserDto.username },
+    ];
 
-    if (foundUser) {
+    const foundUsers &#x3D; await this.usersService.findAll(where);
+    const foundUser &#x3D; foundUsers[0];
+
+    if (foundUser[0]) {
       throw new HttpException(&#x27;User already exists&#x27;, HttpStatus.CONFLICT);
     }
 
@@ -499,12 +692,36 @@ export class AuthController {
   @UseGuards(JwtGuard)
   @ApiBearerAuth()
   @ApiResponse({
-    status: 200,
+    status: HttpStatus.OK,
     description: &#x27;User found&#x27;,
   })
-  @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
+  @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: &#x27;Unauthorized&#x27; })
   async me(@Req() request: Request) {
     return request.user;
+  }
+
+  @Patch(&#x27;me&#x27;)
+  @UseGuards(JwtGuard)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: &#x27;User updated&#x27;,
+  })
+  @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: &#x27;Unauthorized&#x27; })
+  async update(@Req() request, @Body() updateUserDto: UpdateUserDto) {
+    return this.authService.update(request.user.id, updateUserDto);
+  }
+
+  @Delete(&#x27;me&#x27;)
+  @UseGuards(JwtGuard)
+  @ApiBearerAuth()
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: &#x27;User deleted&#x27;,
+  })
+  @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: &#x27;Unauthorized&#x27; })
+  async delete(@Req() request) {
+    return this.usersService.remove(request.user.id);
   }
 }
 </code></pre>

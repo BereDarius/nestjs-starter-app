@@ -192,8 +192,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/health/health.controller.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="29"
+                                    class="link-to-prism">src/health/health.controller.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -213,7 +213,8 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiBearerAuth, ApiTags } from &#x27;@nestjs/swagger&#x27;;
+import { Controller, Get, UseGuards } from &#x27;@nestjs/common&#x27;;
 import {
   DiskHealthIndicator,
   HealthCheck,
@@ -221,7 +222,14 @@ import {
   MemoryHealthIndicator,
   TypeOrmHealthIndicator,
 } from &#x27;@nestjs/terminus&#x27;;
+import { JwtGuard } from &#x27;src/auth/guards/jwt.guard&#x27;;
+import { RoleEnum } from &#x27;src/auth/enums/roles.enum&#x27;;
+import { Roles } from &#x27;src/auth/decorators/roles.decorator&#x27;;
 
+@ApiTags(&#x27;Health Checks&#x27;)
+@UseGuards(JwtGuard)
+@Roles(RoleEnum.ADMIN)
+@ApiBearerAuth()
 @Controller(&#x27;health&#x27;)
 export class HealthController {
   constructor(

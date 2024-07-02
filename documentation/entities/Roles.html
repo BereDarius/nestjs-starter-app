@@ -246,7 +246,7 @@ export class Roles extends BaseEntity {
   @Unique([&#x27;name&#x27;])
   name: string;
 
-  @OneToMany(() &#x3D;&gt; Users, (user) &#x3D;&gt; user.role)
+  @OneToMany(() &#x3D;&gt; Users, user &#x3D;&gt; user.role)
   users: Users[];
 }
 </code></pre>

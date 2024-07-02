@@ -180,7 +180,7 @@
       format: &#x27;YYYY-MM-DD hh:mm:ss A&#x27;,
     }),
     align(),
-    printf((info) &#x3D;&gt; &#x60;[${info.timestamp}] ${info.level}: ${info.message}&#x60;),
+    printf(info &#x3D;&gt; &#x60;[${info.timestamp}] ${info.level}: ${info.message}&#x60;),
   ),
   transports: [new transports.Console()],
 }</code>
@@ -328,10 +328,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>async (
-  hashedPassword: string,
-  plainTextPassword: string,
-) &#x3D;&gt; {
+                        <i>Default value : </i><code>async (hashedPassword: string, plainTextPassword: string) &#x3D;&gt; {
   return await compare(plainTextPassword, hashedPassword);
 }</code>
                     </td>

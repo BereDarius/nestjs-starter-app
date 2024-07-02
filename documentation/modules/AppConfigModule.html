@@ -137,8 +137,10 @@ import { Module } from &#x27;@nestjs/common&#x27;;
   imports: [
     ConfigModule.forRoot({
       validationSchema: Joi.object({
+        // APP
         PORT: Joi.number().port().default(3000),
         NODE_ENV: Joi.string()
+          .required()
           .valid(&#x27;development&#x27;, &#x27;production&#x27;, &#x27;test&#x27;)
           .default(&#x27;development&#x27;),
         JWT_SECRET: Joi.string().required().default(&#x27;secret&#x27;),
@@ -146,10 +148,15 @@ import { Module } from &#x27;@nestjs/common&#x27;;
           .valid(&#x27;error&#x27;, &#x27;warn&#x27;, &#x27;info&#x27;, &#x27;http&#x27;, &#x27;verbose&#x27;, &#x27;debug&#x27;, &#x27;silly&#x27;)
           .default(&#x27;info&#x27;),
 
+        // DATABASE
+        DB_TYPE: Joi.string()
+          .required()
+          .valid(&#x27;postgres&#x27;, &#x27;mysql&#x27;, &#x27;mariadb&#x27;, &#x27;cockroachdb&#x27;, &#x27;mongodb&#x27;, &#x27;aurora-mysql&#x27;)
+          .default(&#x27;postgres&#x27;),
         DB_HOST: Joi.string().required().default(&#x27;localhost&#x27;),
         DB_PORT: Joi.number().default(5432),
         DB_USER: Joi.string().required().default(&#x27;postgres&#x27;),
-        DB_PASSWORD: Joi.string().required().default(&#x27;password&#x27;),
+        DB_PASSWORD: Joi.string().required(),
         DB_NAME: Joi.string().required().default(&#x27;postgres&#x27;),
       }),
       cache: true,

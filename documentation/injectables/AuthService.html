@@ -141,6 +141,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#update" >update</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#validateUser" >validateUser</a>
                             </li>
                         </ul>
@@ -166,7 +170,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/auth/auth.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/auth/auth.service.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -243,8 +247,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/auth/auth.service.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/auth/auth.service.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -294,6 +298,87 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="update"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>update</b></span>
+                        <a href="#update"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>update(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateUserDto: <a href="../classes/UpdateUserDto.html" target="_self">UpdateUserDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/auth/auth.service.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>updateUserDto</td>
+                                            <td>
+                                                            <code><a href="../classes/UpdateUserDto.html" target="_self" >UpdateUserDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="validateUser"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
@@ -312,8 +397,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/auth/auth.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="18"
+                                    class="link-to-prism">src/auth/auth.service.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -367,29 +452,37 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { encrypt, matchPassword } from &#x27;src/lib/password-helpers&#x27;;
 import { CreateUserDto } from &#x27;src/users/dto/create-user.dto&#x27;;
+import { FindOptionsWhere } from &#x27;typeorm&#x27;;
 import { Injectable } from &#x27;@nestjs/common&#x27;;
 import { JwtService } from &#x27;@nestjs/jwt&#x27;;
 import { LoginDto } from &#x27;./dto/login.dto&#x27;;
+import { UpdateUserDto } from &#x27;src/users/dto/update-user.dto&#x27;;
+import { Users } from &#x27;src/users/entities/users.entity&#x27;;
 import { UsersService } from &#x27;src/users/users.service&#x27;;
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
-    private jwtService: JwtService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async validateUser(loginDto: LoginDto) {
-    const foundUser &#x3D; await this.usersService.findOne(loginDto.username);
+    const where: FindOptionsWhere&lt;Users&gt;[] &#x3D; [
+      {
+        username: loginDto.username,
+      },
+      { email: loginDto.username },
+    ];
+
+    const foundUsers &#x3D; await this.usersService.findAll(where);
+    const foundUser &#x3D; foundUsers[0];
 
     if (!foundUser) {
       return null;
     }
 
-    const isPasswordMatching &#x3D; await matchPassword(
-      foundUser.password,
-      loginDto.password,
-    );
+    const isPasswordMatching &#x3D; await matchPassword(foundUser.password, loginDto.password);
 
     if (!isPasswordMatching) {
       return null;
@@ -421,6 +514,16 @@ export class AuthService {
       ...result,
       access_token: this.jwtService.sign(result),
     };
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const updateUserDtoCopy &#x3D; { ...updateUserDto };
+
+    if (updateUserDto.password) {
+      updateUserDtoCopy.password &#x3D; await encrypt(updateUserDto.password);
+    }
+
+    return this.usersService.update(id, updateUserDtoCopy);
   }
 }
 </code></pre>

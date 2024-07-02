@@ -24,10 +24,6 @@
 <title>cluster_TodosModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="112,-70 112,-268 384,-268 384,-70 112,-70"/>
 </g>
-<g id="clust4" class="cluster">
-<title>cluster_TodosModule_exports</title>
-<polygon fill="none" stroke="black" points="184,-208 184,-260 296,-260 296,-208 184,-208"/>
-</g>
 <g id="clust6" class="cluster">
 <title>cluster_TodosModule_providers</title>
 <polygon fill="none" stroke="black" points="232,-78 232,-130 376,-130 376,-78 232,-78"/>
@@ -35,6 +31,10 @@
 <g id="clust3" class="cluster">
 <title>cluster_TodosModule_imports</title>
 <polygon fill="none" stroke="black" points="120,-78 120,-130 224,-130 224,-78 120,-78"/>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_TodosModule_exports</title>
+<polygon fill="none" stroke="black" points="184,-208 184,-260 296,-260 296,-208 184,-208"/>
 </g>
 <!-- AuthModule -->
 <g id="node1" class="node">

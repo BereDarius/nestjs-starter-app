@@ -168,6 +168,7 @@
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#user_id" >user_id</a>
                             </li>
                         </ul>
@@ -351,6 +352,7 @@
                     <a name="user_id"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>user_id</b></span>
                         <a href="#user_id"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -367,13 +369,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsUUID()<br />
+                            @ApiHideProperty()<br />@IsUUID()<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/todos/dto/create-todo.dto.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/todos/dto/create-todo.dto.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -392,7 +394,8 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiHideProperty, ApiProperty } from &#x27;@nestjs/swagger&#x27;;
+import {
   IsDateString,
   IsEnum,
   IsNotEmpty,
@@ -401,7 +404,6 @@
   MaxLength,
   MinLength,
 } from &#x27;class-validator&#x27;;
-import { ApiProperty } from &#x27;@nestjs/swagger&#x27;;
 import { TodoStatusEnum } from &#x27;../enums/todo-status.enum&#x27;;
 import { Transform } from &#x27;class-transformer&#x27;;
 
@@ -432,6 +434,7 @@ export class CreateTodoDto {
   @Transform(({ value }) &#x3D;&gt; value.trim().toUpperCase())
   status: string;
 
+  @ApiHideProperty()
   @IsUUID()
   user_id: string;
 }

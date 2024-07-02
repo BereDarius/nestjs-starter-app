@@ -250,6 +250,14 @@ export class UsersController {
 }
 ```
 
+### Compodoc
+
+In order to generate documentation using Compodoc, you can run the following command:
+
+```bash
+$ yarn doc
+```
+
 ## Contributing
 
 Contributions are welcome! If you have any suggestions or improvements, feel free to open an issue or submit a pull request.

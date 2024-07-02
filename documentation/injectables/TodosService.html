@@ -236,8 +236,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/todos/todos.service.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="12"
+                                    class="link-to-prism">src/todos/todos.service.ts:12</a></div>
                         </td>
                     </tr>
 
@@ -273,7 +273,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="../entitys/Todos.html" target="_self" >Promise&lt;Todos&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -296,15 +296,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>findAll(userId: <a href="../s/undefined.html" target="_self">string | undefined</a>)</code>
+<code>findAll(where: <a href="../entitys/Todos.html" target="_self">FindOptionsWhere&lt;Todos&gt; | FindOptionsWhere&lt;Todos&gt;[]</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/todos/todos.service.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="16"
+                                    class="link-to-prism">src/todos/todos.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -325,9 +325,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>userId</td>
+                                                <td>where</td>
                                             <td>
-                                                            <code><a href="../miscellaneous/variables.html#undefined" target="_self" >string | undefined</a></code>
+                                                            <code><a href="../entitys/Todos.html" target="_self" >FindOptionsWhere&lt;Todos&gt; | FindOptionsWhere&lt;Todos&gt;[]</a></code>
                                             </td>
 
                                             <td>
@@ -340,7 +340,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="../entitys/Todos.html" target="_self" >Promise&lt;Todos[]&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -370,8 +370,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/todos/todos.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/todos/todos.service.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -407,7 +407,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="../entitys/Todos.html" target="_self" >Promise&lt;Todos&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -437,8 +437,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/todos/todos.service.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/todos/todos.service.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -504,8 +504,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/todos/todos.service.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="24"
+                                    class="link-to-prism">src/todos/todos.service.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -553,7 +553,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="../entitys/Todos.html" target="_self" >Promise&lt;Todos&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -569,41 +569,35 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CreateTodoDto } from &#x27;./dto/create-todo.dto&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { FindOptionsWhere, Repository } from &#x27;typeorm&#x27;;
+import { CreateTodoDto } from &#x27;./dto/create-todo.dto&#x27;;
 import { Injectable } from &#x27;@nestjs/common&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
-import { Repository } from &#x27;typeorm&#x27;;
 import { Todos } from &#x27;./entities/todo.entity&#x27;;
 import { UpdateTodoDto } from &#x27;./dto/update-todo.dto&#x27;;
 
 @Injectable()
 export class TodosService {
-  constructor(
-    @InjectRepository(Todos) private todosRepository: Repository&lt;Todos&gt;,
-  ) {}
+  constructor(@InjectRepository(Todos) private todosRepository: Repository&lt;Todos&gt;) {}
 
-  create(createTodoDto: CreateTodoDto) {
+  create(createTodoDto: CreateTodoDto): Promise&lt;Todos&gt; {
     return this.todosRepository.save(createTodoDto);
   }
 
-  findAll(userId: string | undefined) {
-    if (userId) {
-      return this.todosRepository.find({ where: { user_id: userId } });
-    }
-
-    return this.todosRepository.find();
+  findAll(where: FindOptionsWhere&lt;Todos&gt; | FindOptionsWhere&lt;Todos&gt;[]): Promise&lt;Todos[]&gt; {
+    return this.todosRepository.find({ where });
   }
 
-  findOne(id: string) {
+  findOne(id: string): Promise&lt;Todos&gt; {
     return this.todosRepository.findOne({ where: { id } });
   }
 
-  update(id: string, updateTodoDto: UpdateTodoDto) {
+  update(id: string, updateTodoDto: UpdateTodoDto): Promise&lt;Todos&gt; {
     return this.todosRepository.save({ id, ...updateTodoDto });
   }
 
   remove(id: string) {
-    return this.todosRepository.delete({ id });
+    return this.todosRepository.delete(id);
   }
 }
 </code></pre>

@@ -235,7 +235,7 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br />@Roles(RoleEnum.USER, RoleEnum.MODERATOR)<br />@ApiResponse({status: 201, description: &#x27;Todo created&#x27;})<br />@ApiResponse({status: 401, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: 403, description: &#x27;Forbidden&#x27;})<br /></code>
+                    <code>@Post()<br />@Roles(RoleEnum.USER, RoleEnum.MODERATOR)<br />@ApiResponse({status: undefined, description: &#x27;Todo created&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Forbidden&#x27;})<br /></code>
                 </td>
             </tr>
 
@@ -319,7 +319,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findAll(request)</code>
+                    <code>findAll(request, query: <a href="../classes/QueryTodoDto.html" target="_self">QueryTodoDto</a>)</code>
                 </td>
             </tr>
 
@@ -327,7 +327,7 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br />@Roles(RoleEnum.USER, RoleEnum.MODERATOR)<br />@UseGuards(RoleGuard)<br />@ApiResponse({status: 200, description: &#x27;Todos found&#x27;})<br />@ApiResponse({status: 401, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: 403, description: &#x27;Forbidden&#x27;})<br /></code>
+                    <code>@Get()<br />@Roles(RoleEnum.USER, RoleEnum.MODERATOR)<br />@UseGuards(RoleGuard)<br />@ApiResponse({status: undefined, description: &#x27;Todos found&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Forbidden&#x27;})<br /></code>
                 </td>
             </tr>
 
@@ -349,12 +349,27 @@
                                     <thead>
                                         <tr>
                                             <td>Name</td>
+                                                <td>Type</td>
                                             <td>Optional</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                                 <td>request</td>
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>query</td>
+                                            <td>
+                                                            <code><a href="../classes/QueryTodoDto.html" target="_self" >QueryTodoDto</a></code>
+                                            </td>
 
                                             <td>
                                                     No
@@ -405,14 +420,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;:id&#x27;)<br />@Roles(RoleEnum.USER, RoleEnum.MODERATOR)<br />@ApiResponse({status: 200, description: &#x27;Todo found&#x27;})<br />@ApiResponse({status: 401, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: 403, description: &#x27;Forbidden&#x27;})<br />@ApiResponse({status: 404, description: &#x27;Not Found&#x27;})<br /></code>
+                    <code>@Get(&#x27;:id&#x27;)<br />@Roles(RoleEnum.USER, RoleEnum.MODERATOR)<br />@ApiResponse({status: undefined, description: &#x27;Todo found&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Forbidden&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Not Found&#x27;})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/todos/todos.controller.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/todos/todos.controller.ts:88</a></div>
                         </td>
                     </tr>
 
@@ -491,8 +506,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="28"
-                                    class="link-to-prism">src/todos/todos.controller.ts:28</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/todos/todos.controller.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -572,14 +587,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br />@Roles(RoleEnum.USER, RoleEnum.MODERATOR)<br />@ApiResponse({status: 200, description: &#x27;Todo removed&#x27;})<br />@ApiResponse({status: 401, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: 403, description: &#x27;Forbidden&#x27;})<br />@ApiResponse({status: 404, description: &#x27;Not Found&#x27;})<br /></code>
+                    <code>@Delete(&#x27;:id&#x27;)<br />@Roles(RoleEnum.USER, RoleEnum.MODERATOR)<br />@ApiResponse({status: undefined, description: &#x27;Todo removed&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Forbidden&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Not Found&#x27;})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="115"
-                                    class="link-to-prism">src/todos/todos.controller.ts:115</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/todos/todos.controller.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -665,14 +680,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Patch(&#x27;:id&#x27;)<br />@Roles(RoleEnum.USER, RoleEnum.MODERATOR)<br />@ApiResponse({status: 200, description: &#x27;Todo updated&#x27;})<br />@ApiResponse({status: 401, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: 403, description: &#x27;Forbidden&#x27;})<br />@ApiResponse({status: 404, description: &#x27;Not Found&#x27;})<br /></code>
+                    <code>@Patch(&#x27;:id&#x27;)<br />@Roles(RoleEnum.USER, RoleEnum.MODERATOR)<br />@ApiResponse({status: undefined, description: &#x27;Todo updated&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Unauthorized&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Forbidden&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Not Found&#x27;})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="99"
-                                    class="link-to-prism">src/todos/todos.controller.ts:99</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/todos/todos.controller.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -745,27 +760,33 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiBearerAuth, ApiResponse } from &#x27;@nestjs/swagger&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiBearerAuth, ApiResponse, ApiTags } from &#x27;@nestjs/swagger&#x27;;
 import {
   Body,
   Controller,
   Delete,
   Get,
   HttpException,
+  HttpStatus,
   Param,
   Patch,
   Post,
+  Query,
   Req,
   UseGuards,
 } from &#x27;@nestjs/common&#x27;;
 import { CreateTodoDto } from &#x27;./dto/create-todo.dto&#x27;;
+import { FindOptionsWhere } from &#x27;typeorm&#x27;;
 import { JwtGuard } from &#x27;src/auth/guards/jwt.guard&#x27;;
+import { QueryTodoDto } from &#x27;./dto/query-todo.dto&#x27;;
 import { RoleEnum } from &#x27;src/auth/enums/roles.enum&#x27;;
 import { RoleGuard } from &#x27;src/auth/guards/roles.guard&#x27;;
 import { Roles } from &#x27;src/auth/decorators/roles.decorator&#x27;;
+import { Todos } from &#x27;./entities/todo.entity&#x27;;
 import { TodosService } from &#x27;./todos.service&#x27;;
 import { UpdateTodoDto } from &#x27;./dto/update-todo.dto&#x27;;
 
+@ApiTags(&#x27;Todos&#x27;)
 @Controller(&#x27;todos&#x27;)
 @UseGuards(JwtGuard)
 @ApiBearerAuth()
@@ -778,14 +799,11 @@ export class TodosController {
     const todo &#x3D; await this.todosService.findOne(id);
 
     if (!todo) {
-      throw new HttpException(&#x27;Not Found&#x27;, 404);
+      throw new HttpException(&#x27;Not Found&#x27;, HttpStatus.NOT_FOUND);
     }
 
-    if (
-      todo.user_id !&#x3D;&#x3D; user.id &amp;&amp;
-      (user.role !&#x3D;&#x3D; RoleEnum.ADMIN || user.role !&#x3D;&#x3D; RoleEnum.MODERATOR)
-    ) {
-      throw new HttpException(&#x27;Forbidden&#x27;, 403);
+    if (todo.user_id !&#x3D;&#x3D; user.id &amp;&amp; user.role !&#x3D;&#x3D; RoleEnum.MODERATOR) {
+      throw new HttpException(&#x27;Forbidden&#x27;, HttpStatus.FORBIDDEN);
     }
 
     return todo;
@@ -793,12 +811,9 @@ export class TodosController {
 
   @Post()
   @Roles(RoleEnum.USER, RoleEnum.MODERATOR)
-  @ApiResponse({
-    status: 201,
-    description: &#x27;Todo created&#x27;,
-  })
-  @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
-  @ApiResponse({ status: 403, description: &#x27;Forbidden&#x27; })
+  @ApiResponse({ status: HttpStatus.CREATED, description: &#x27;Todo created&#x27; })
+  @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: &#x27;Unauthorized&#x27; })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: &#x27;Forbidden&#x27; })
   create(@Req() request, @Body() createTodoDto: CreateTodoDto) {
     const { user } &#x3D; request;
 
@@ -812,25 +827,26 @@ export class TodosController {
   @Get()
   @Roles(RoleEnum.USER, RoleEnum.MODERATOR)
   @UseGuards(RoleGuard)
-  @ApiResponse({ status: 200, description: &#x27;Todos found&#x27; })
-  @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
-  @ApiResponse({ status: 403, description: &#x27;Forbidden&#x27; })
-  findAll(@Req() request) {
+  @ApiResponse({ status: HttpStatus.OK, description: &#x27;Todos found&#x27; })
+  @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: &#x27;Unauthorized&#x27; })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: &#x27;Forbidden&#x27; })
+  findAll(@Req() request, @Query() query: QueryTodoDto) {
     const { user } &#x3D; request;
 
-    if (user.role &#x3D;&#x3D;&#x3D; RoleEnum.ADMIN || user.role &#x3D;&#x3D;&#x3D; RoleEnum.MODERATOR) {
-      return this.todosService.findAll(undefined);
-    }
+    const where: FindOptionsWhere&lt;Todos&gt; &#x3D; {
+      user_id: user.id,
+      ...query,
+    };
 
-    return this.todosService.findAll(user.id);
+    return this.todosService.findAll(where);
   }
 
   @Get(&#x27;:id&#x27;)
   @Roles(RoleEnum.USER, RoleEnum.MODERATOR)
-  @ApiResponse({ status: 200, description: &#x27;Todo found&#x27; })
-  @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
-  @ApiResponse({ status: 403, description: &#x27;Forbidden&#x27; })
-  @ApiResponse({ status: 404, description: &#x27;Not Found&#x27; })
+  @ApiResponse({ status: HttpStatus.OK, description: &#x27;Todo found&#x27; })
+  @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: &#x27;Unauthorized&#x27; })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: &#x27;Forbidden&#x27; })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: &#x27;Not Found&#x27; })
   async findOne(@Req() request, @Param(&#x27;id&#x27;) id: string) {
     const todo &#x3D; await this.getTodoOwnership(request, id);
 
@@ -839,15 +855,11 @@ export class TodosController {
 
   @Patch(&#x27;:id&#x27;)
   @Roles(RoleEnum.USER, RoleEnum.MODERATOR)
-  @ApiResponse({ status: 200, description: &#x27;Todo updated&#x27; })
-  @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
-  @ApiResponse({ status: 403, description: &#x27;Forbidden&#x27; })
-  @ApiResponse({ status: 404, description: &#x27;Not Found&#x27; })
-  async update(
-    @Req() request,
-    @Param(&#x27;id&#x27;) id: string,
-    @Body() updateTodoDto: UpdateTodoDto,
-  ) {
+  @ApiResponse({ status: HttpStatus.OK, description: &#x27;Todo updated&#x27; })
+  @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: &#x27;Unauthorized&#x27; })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: &#x27;Forbidden&#x27; })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: &#x27;Not Found&#x27; })
+  async update(@Req() request, @Param(&#x27;id&#x27;) id: string, @Body() updateTodoDto: UpdateTodoDto) {
     await this.getTodoOwnership(request, id);
 
     return this.todosService.update(id, updateTodoDto);
@@ -855,10 +867,10 @@ export class TodosController {
 
   @Delete(&#x27;:id&#x27;)
   @Roles(RoleEnum.USER, RoleEnum.MODERATOR)
-  @ApiResponse({ status: 200, description: &#x27;Todo removed&#x27; })
-  @ApiResponse({ status: 401, description: &#x27;Unauthorized&#x27; })
-  @ApiResponse({ status: 403, description: &#x27;Forbidden&#x27; })
-  @ApiResponse({ status: 404, description: &#x27;Not Found&#x27; })
+  @ApiResponse({ status: HttpStatus.OK, description: &#x27;Todo removed&#x27; })
+  @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: &#x27;Unauthorized&#x27; })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: &#x27;Forbidden&#x27; })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: &#x27;Not Found&#x27; })
   async remove(@Req() request, @Param(&#x27;id&#x27;) id: string) {
     await this.getTodoOwnership(request, id);
 

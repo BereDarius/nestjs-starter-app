@@ -379,12 +379,12 @@ export class Todos extends BaseEntity {
   due_date: Date;
 
   @Column({ default: &#x27;PENDING&#x27; })
-  @ManyToOne(() &#x3D;&gt; TodoStatus, (status) &#x3D;&gt; status.todos)
+  @ManyToOne(() &#x3D;&gt; TodoStatus, status &#x3D;&gt; status.todos)
   @JoinColumn({ name: &#x27;status&#x27;, referencedColumnName: &#x27;name&#x27; })
   status: string;
 
   @Column()
-  @ManyToOne(() &#x3D;&gt; Users, (user) &#x3D;&gt; user.todos, { onDelete: &#x27;CASCADE&#x27; })
+  @ManyToOne(() &#x3D;&gt; Users, user &#x3D;&gt; user.todos, { onDelete: &#x27;CASCADE&#x27; })
   @JoinColumn({ name: &#x27;user_id&#x27;, referencedColumnName: &#x27;id&#x27; })
   user_id: string;
 }

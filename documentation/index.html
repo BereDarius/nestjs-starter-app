@@ -86,27 +86,193 @@
 <p>This is a starter app for NestJS, a powerful Node.js framework. It provides authentication and authorization using Passport, along with general configurations for database, logging, and security.</p>
 <h2>Features</h2>
 <ul>
-<li>Passport authentication</li>
-<li>Authorization middleware</li>
 <li>Database configuration</li>
-<li>Logging setup</li>
-<li>Security measures</li>
+<li>Authentication, authorization, RBAC</li>
+<li>Security (helmet, rate limiting, CORS)</li>
+<li>Health checks</li>
+<li>Admin routes</li>
+<li>Logging</li>
+<li>Documentation (Swagger, compodoc)</li>
+<li>Testing (Jest)</li>
+<li>Linting (ESLint, Prettier)</li>
 </ul>
 <h2>Installation</h2>
 <ol>
-<li>Clone the repository: <code>git clone https://github.com/your-username/nestjs-starter-app.git</code></li>
-<li>Install dependencies: <code>npm install</code></li>
-<li>Configure the database connection in <code>config/database.ts</code></li>
-<li>Set up the necessary environment variables</li>
-<li>Start the server: <code>npm run start</code></li>
+<li>Clone the repository: <code>git clone https://github.com/BereDarius/nestjs-starter-app.git</code></li>
+<li>Install dependencies: <code>yarn install</code></li>
+<li>Set up the necessary environment variables:</li>
+</ol>
+<ul>
+<li><p>Create a <code>.env</code> file in the root directory</p>
+</li>
+<li><p>Add the following variables:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># .env
+
+PORT=3000
+NODE_ENV=development
+JWT_SECRET=your_secret
+LOG_LEVEL=debug
+
+DB_TYPE=postgres
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_NAME=your_database</code></pre></div></li>
+</ul>
+<ol start="4">
+<li><p>Generate a self-signed certificate for HTTPS (optional, but recommended for production):</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">$ mkdir secrets</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-bash">$ cd secrets</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-bash">$ openssl genrsa -out private-key.pem 2048</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-bash">$ openssl req -new -sha256 -key private-key.pem -out csr.pem</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-bash">$ openssl x509 -req -in csr.pem -signkey private-key.pem -out public-certificate.pem</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-bash">$ rm csr.pem</code></pre></div></li>
+<li><p>Start the server: <code>yarn start:dev</code></p>
+</li>
 </ol>
 <h2>Usage</h2>
-<ol>
-<li>Register a new user</li>
-<li>Log in with your credentials</li>
-<li>Access protected routes based on your role</li>
-</ol>
-<h2>Contributing</h2>
+<p>You can access the API documentation at <code>http://localhost:3000/api</code>. The Swagger UI provides a user-friendly interface to test the endpoints.</p>
+<p>There is also a separate admin route at <code>http://localhost:3000/api/admin</code>. This endpoint should be protected and only accessible to users with the <code>admin</code> role.</p>
+<h2>Authorization</h2>
+<p>In order to protect routes, you can use the <code>@UseGuards(JwtGuard)</code> decorator. This will ensure that only authenticated users can access the route.</p>
+<p>This decorator can be used both at the controller level:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// users.controller.ts
+
+import { Controller, UseGuards } from &#39;&#64;nestjs/common&#39;;
+import { JwtGuard } from &#39;src/auth/guards/jwt.guard&#39;;
+
+&#64;UseGuards(JwtGuard)
+&#64;Controller(&#39;users&#39;)
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  // routes...
+}</code></pre></div><p>in which case all routes in the controller will be protected.</p>
+<p>Or at the method level:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// users.controller.ts
+
+import { Controller, Get, UseGuards } from &#39;&#64;nestjs/common&#39;;
+import { JwtGuard } from &#39;src/auth/guards/jwt.guard&#39;;
+import { UsersService } from &#39;./users.service&#39;;
+
+&#64;Controller(&#39;users&#39;)
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  &#64;UseGuards(JwtGuard)
+  &#64;Get()
+  findAll() {
+    return this.usersService.findAll();
+  }
+
+  // other routes...
+}</code></pre></div><p>in which case only the specified route will be protected.</p>
+<h2>RBAC (Role-Based Access Control)</h2>
+<p>In order to restrict access to certain routes based on the user&#39;s role, you can use the <code>@Roles</code> decorator together with the <code>RoleEnum</code>.</p>
+<p>This decorator takes roles as arguments and checks if the user either has at least one of the specified roles or a role with higher priority.</p>
+<p>For example, if a route is protected with <code>@Roles(RoleEnum.ADMIN)</code>, only users with the <code>admin</code> role will be able to access it.</p>
+<p>But if the route is protected with <code>@Roles(RoleEnum.USER)</code>, both <code>admin</code> and <code>user</code> roles will be able to access it.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// users.controller.ts
+
+import { Controller, Get, UseGuards } from &#39;&#64;nestjs/common&#39;;
+import { JwtGuard } from &#39;src/auth/guards/jwt.guard&#39;;
+import { Roles } from &#39;src/auth/decorators/roles.decorator&#39;;
+
+&#64;Controller(&#39;users&#39;)
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  &#64;UseGuards(JwtGuard)
+  &#64;Roles(RoleEnum.ADMIN)
+  &#64;Get()
+  findAll() {
+    return this.usersService.findAll();
+  }
+
+  // other routes...
+}</code></pre></div><p>Same as for the <code>@UseGuards</code> decorator, the <code>@Roles</code> decorator can be used at the controller level or at the method level.</p>
+<h2>Swagger</h2>
+<p>In order to register a new route in Swagger, you can use the decorators provided by the <code>@nestjs/swagger</code> package.</p>
+<p>In the <code>main.ts</code> file, you can change the Swagger configuration for regular/admin routes:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// main.ts
+
+import { SwaggerModule, DocumentBuilder } from &#39;&#64;nestjs/swagger&#39;;
+import { AppModule } from &#39;./app.module&#39;;
+import { AuthModule } from &#39;./auth/auth.module&#39;;
+import { NestFactory } from &#39;&#64;nestjs/core&#39;;
+import { TodosModule } from &#39;./todos/todos.module&#39;;
+import { UsersModule } from &#39;./users/users.module&#39;;
+// ... other imports
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  // ... other configurations
+
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle(&#39;TODO App API&#39;)
+    .setDescription(&#39;Starter code for an API using NestJS&#39;)
+    .setVersion(&#39;1.0&#39;)
+    .addBearerAuth()
+    .setLicense(&#39;MIT&#39;, &#39;https://opensource.org/licenses/MIT&#39;)
+    .build();
+  const document = SwaggerModule.createDocument(app, swaggerConfig, {
+    include: [AuthModule, TodosModule, UsersModule],
+  });
+  SwaggerModule.setup(&#39;api&#39;, app, document);
+
+  const adminSwaggerConfig = new DocumentBuilder();
+  // ... admin configuration
+  const adminDocument = SwaggerModule.createDocument(app, adminSwaggerConfig, {
+    include: [AdminModule, HealthModule],
+  });
+  SwaggerModule.setup(&#39;api/admin&#39;, app, adminDocument);
+
+  await app.listen(3000);
+}
+bootstrap();</code></pre></div><p>An end-to-end example would look like this:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// create-user.dto.ts
+
+import { ApiProperty } from &#39;&#64;nestjs/swagger&#39;;
+import { IsString } from &#39;class-validator&#39;;
+
+export class CreateUserDto {
+  &#64;ApiProperty({ example: &#39;john.doe&#39; })
+  &#64;IsString()
+  username: string;
+
+  &#64;ApiProperty({ example: &#39;password&#39; })
+  &#64;IsString()
+  password: string;
+
+  // other properties...
+}
+
+// users.controller.ts
+
+import { Controller, Get, Post, Body, UseGuards } from &#39;&#64;nestjs/common&#39;;
+import { ApiBearerAuth } from &#39;&#64;nestjs/swagger&#39;;
+import { CreateUserDto } from &#39;./dto/create-user.dto&#39;;
+import { JwtGuard } from &#39;src/auth/guards/jwt.guard&#39;;
+import { UsersService } from &#39;./users.service&#39;;
+
+&#64;ApiTags(&#39;Users&#39;)
+&#64;Controller(&#39;users&#39;)
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  &#64;Get()
+  &#64;UseGuards(JwtGuard) // when you have a protected route
+  &#64;ApiBearerAuth() // don&#39;t forget to add this decorator; it lets Swagger know that the route is protected
+  findAll() {
+    return this.usersService.findAll();
+  }
+
+  &#64;Post()
+  createUser(&#64;Body() createUserDto: CreateUserDto) {
+    return this.usersService.createUser(createUserDto);
+  }
+
+  // other routes...
+}</code></pre></div><h3>Compodoc</h3>
+<p>In order to generate documentation using Compodoc, you can run the following command:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">$ yarn doc</code></pre></div><h2>Contributing</h2>
 <p>Contributions are welcome! If you have any suggestions or improvements, feel free to open an issue or submit a pull request.</p>
 <h2>License</h2>
 <p>This project is licensed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for more information.</p>

@@ -310,13 +310,11 @@ export class RoleGuard implements CanActivate {
     private accessControlService: AccessContorlService,
   ) {}
 
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise&lt;boolean&gt; | Observable&lt;boolean&gt; {
-    const requiredRoles &#x3D; this.reflector.getAllAndOverride&lt;RoleEnum[]&gt;(
-      ROLE_KEY,
-      [context.getHandler(), context.getClass()],
-    );
+  canActivate(context: ExecutionContext): boolean | Promise&lt;boolean&gt; | Observable&lt;boolean&gt; {
+    const requiredRoles &#x3D; this.reflector.getAllAndOverride&lt;RoleEnum[]&gt;(ROLE_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
 
     const request &#x3D; context.switchToHttp().getRequest();
 

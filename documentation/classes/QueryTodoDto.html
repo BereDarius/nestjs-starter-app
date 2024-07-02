@@ -79,7 +79,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content entity">
+               <div class="content class">
                    <div class="content-data">
 
 
@@ -87,9 +87,15 @@
 
 
 
+
+
+
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Entities</li>
-  <li class="breadcrumb-item" >TodoStatus</li>
+  <li class="breadcrumb-item">Classes</li>
+  <li class="breadcrumb-item" >QueryTodoDto</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -113,8 +119,10 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/todos/entities/todo-status.entity.ts</code>
+            <code>src/todos/dto/query-todo.dto.ts</code>
         </p>
+
+
 
 
 
@@ -133,16 +141,35 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Optional</span>
                                 <a href="#description" >description</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
-                                <a href="#name" >name</a>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#due_date" >due_date</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#todos" >todos</a>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#status" >status</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#title" >title</a>
                             </li>
                         </ul>
                     </td>
@@ -157,6 +184,7 @@
     </table>
 </section>
 
+
             <section data-compodoc="block-properties">
     
     <h3 id="inputs">
@@ -169,6 +197,10 @@
                     <a name="description"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Optional</span>
                         <span ><b>description</b></span>
                         <a href="#description"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -185,13 +217,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @Column()<br />
+                            @ApiProperty({required: false, example: &#x27;Description&#x27;})<br />@IsOptional()<br />@IsString()<br />@Transform( &#x3D;&gt; )<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/todos/entities/todo-status.entity.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/todos/dto/query-todo.dto.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -202,12 +234,55 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="name"></a>
+                    <a name="due_date"></a>
                     <span class="name">
                             <span class="modifier"></span>
                             <span class="modifier"></span>
-                        <span ><b>name</b></span>
-                        <a href="#name"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>due_date</b></span>
+                        <a href="#due_date"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ApiProperty({required: false, example: &#x27;2024-06-29&#x27;})<br />@IsOptional()<br />@IsDateString()<br />@Transform( &#x3D;&gt; )<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/todos/dto/query-todo.dto.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="status"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>status</b></span>
+                        <a href="#status"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -222,13 +297,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @Column()<br />@Unique([&#x27;name&#x27;])<br />
+                            @ApiProperty({required: false, example: &#x27;PENDING&#x27;, enum: TodoStatusEnum})<br />@IsOptional()<br />@IsEnum(TodoStatusEnum)<br />@Transform( &#x3D;&gt; )<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/todos/entities/todo-status.entity.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/todos/dto/query-todo.dto.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -239,17 +314,21 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="todos"></a>
+                    <a name="title"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                        <span ><b>todos</b></span>
-                        <a href="#todos"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>title</b></span>
+                        <a href="#title"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../entitys/Todos.html" target="_self" >Todos[]</a></code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                     </td>
                 </tr>
@@ -258,13 +337,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @OneToMany(undefined, todo &#x3D;&gt; todo.status)<br />
+                            @ApiProperty({required: false, example: &#x27;Title&#x27;})<br />@IsOptional()<br />@IsString()<br />@Transform( &#x3D;&gt; )<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/todos/entities/todo-status.entity.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/todos/dto/query-todo.dto.ts:11</a></div>
                         </td>
                     </tr>
 
@@ -272,35 +351,54 @@
         </tbody>
     </table>
 </section>
+
+
+
+
+
+
+
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Column, Entity, OneToMany, Unique } from &#x27;typeorm&#x27;;
-import { BaseEntity } from &#x27;src/config/entities/base.entity&#x27;;
-import { Todos } from &#x27;./todo.entity&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IsDateString, IsEnum, IsOptional, IsString } from &#x27;class-validator&#x27;;
+import { ApiProperty } from &#x27;@nestjs/swagger&#x27;;
+import { TodoStatusEnum } from &#x27;../enums/todo-status.enum&#x27;;
+import { Transform } from &#x27;class-transformer&#x27;;
 
-@Entity()
-export class TodoStatus extends BaseEntity {
-  @Column()
-  @Unique([&#x27;name&#x27;])
-  name: string;
+export class QueryTodoDto {
+  @ApiProperty({ required: false, example: &#x27;Title&#x27; })
+  @IsOptional()
+  @IsString()
+  @Transform(({ value }) &#x3D;&gt; value.trim())
+  title?: string;
 
-  @Column()
-  description: string;
+  @ApiProperty({ required: false, example: &#x27;Description&#x27; })
+  @IsOptional()
+  @IsString()
+  @Transform(({ value }) &#x3D;&gt; value.trim())
+  description?: string;
 
-  @OneToMany(() &#x3D;&gt; Todos, todo &#x3D;&gt; todo.status)
-  todos: Todos[];
+  @ApiProperty({ required: false, example: &#x27;2024-06-29&#x27; })
+  @IsOptional()
+  @IsDateString()
+  @Transform(({ value }) &#x3D;&gt; new Date(value))
+  due_date?: Date;
+
+  @ApiProperty({
+    required: false,
+    example: &#x27;PENDING&#x27;,
+    enum: TodoStatusEnum,
+  })
+  @IsOptional()
+  @IsEnum(TodoStatusEnum)
+  @Transform(({ value }) &#x3D;&gt; value.trim().toUpperCase())
+  status?: string;
 }
 </code></pre>
     </div>
 </div>
-
-
-
-
-
-
 
 
 
@@ -335,8 +433,8 @@ export class TodoStatus extends BaseEntity {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'entity';
-            var COMPODOC_CURRENT_PAGE_URL = 'TodoStatus.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'QueryTodoDto.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

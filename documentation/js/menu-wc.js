@@ -61,6 +61,26 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </a>
                         <ul class="links collapse " ${ isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"' }>
                             <li class="link">
+                                <a href="modules/AdminModule.html" data-type="entity-link" >AdminModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-AdminModule-a31a852ab3a4106e3eaaa9be2efffa27599f5c69e6b43aa7cee33ed1a3d1aa480b93d908108c5ed29dbfe652ec2a802f7eb9cc7c972ef55c389edd93c7fbcae1"' : 'data-bs-target="#xs-controllers-links-module-AdminModule-a31a852ab3a4106e3eaaa9be2efffa27599f5c69e6b43aa7cee33ed1a3d1aa480b93d908108c5ed29dbfe652ec2a802f7eb9cc7c972ef55c389edd93c7fbcae1"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-AdminModule-a31a852ab3a4106e3eaaa9be2efffa27599f5c69e6b43aa7cee33ed1a3d1aa480b93d908108c5ed29dbfe652ec2a802f7eb9cc7c972ef55c389edd93c7fbcae1"' :
+                                            'id="xs-controllers-links-module-AdminModule-a31a852ab3a4106e3eaaa9be2efffa27599f5c69e6b43aa7cee33ed1a3d1aa480b93d908108c5ed29dbfe652ec2a802f7eb9cc7c972ef55c389edd93c7fbcae1"' }>
+                                            <li class="link">
+                                                <a href="controllers/AdminTodosController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AdminTodosController</a>
+                                            </li>
+                                            <li class="link">
+                                                <a href="controllers/AdminUsersController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AdminUsersController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                            </li>
+                            <li class="link">
                                 <a href="modules/AppConfigModule.html" data-type="entity-link" >AppConfigModule</a>
                             </li>
                             <li class="link">
@@ -217,6 +237,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="classes/LoginDto.html" data-type="entity-link" >LoginDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/QueryTodoDto.html" data-type="entity-link" >QueryTodoDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/QueryUserDto.html" data-type="entity-link" >QueryUserDto</a>
                             </li>
                             <li class="link">
                                 <a href="classes/TokenDto.html" data-type="entity-link" >TokenDto</a>
