@@ -42,27 +42,27 @@ This is a starter app for NestJS, a powerful Node.js framework. It provides auth
 4. Generate a self-signed certificate for HTTPS (optional, but recommended for production):
 
    ```bash
-   $ mkdir secrets
+   mkdir secrets
    ```
 
    ```bash
-   $ cd secrets
+   cd secrets
    ```
 
    ```bash
-   $ openssl genrsa -out private-key.pem 2048
+   openssl genrsa -out private-key.pem 2048
    ```
 
    ```bash
-   $ openssl req -new -sha256 -key private-key.pem -out csr.pem
+   openssl req -new -sha256 -key private-key.pem -out csr.pem
    ```
 
    ```bash
-   $ openssl x509 -req -in csr.pem -signkey private-key.pem -out public-certificate.pem
+   openssl x509 -req -in csr.pem -signkey private-key.pem -out public-certificate.pem
    ```
 
    ```bash
-   $ rm csr.pem
+   rm csr.pem
    ```
 
 5. Start the server: `yarn start:dev`
