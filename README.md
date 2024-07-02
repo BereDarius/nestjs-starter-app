@@ -43,25 +43,10 @@ This is a starter app for NestJS, a powerful Node.js framework. It provides auth
 
    ```bash
    mkdir secrets
-   ```
-
-   ```bash
    cd secrets
-   ```
-
-   ```bash
    openssl genrsa -out private-key.pem 2048
-   ```
-
-   ```bash
    openssl req -new -sha256 -key private-key.pem -out csr.pem
-   ```
-
-   ```bash
    openssl x509 -req -in csr.pem -signkey private-key.pem -out public-certificate.pem
-   ```
-
-   ```bash
    rm csr.pem
    ```
 
