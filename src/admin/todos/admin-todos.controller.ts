@@ -22,7 +22,7 @@ import { Todos } from 'src/todos/entities/todo.entity';
 import { TodosService } from 'src/todos/todos.service';
 import { UpdateTodoDto } from 'src/todos/dto/update-todo.dto';
 
-@ApiTags('Admin - Todos')
+@ApiTags('Todos')
 @Roles(RoleEnum.ADMIN)
 @UseGuards(JwtGuard)
 @ApiBearerAuth()

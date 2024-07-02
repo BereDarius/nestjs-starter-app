@@ -23,7 +23,7 @@ import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 import { Users } from 'src/users/entities/users.entity';
 import { UsersService } from 'src/users/users.service';
 
-@ApiTags('Admin - Users')
+@ApiTags('Users')
 @Roles(RoleEnum.ADMIN)
 @UseGuards(JwtGuard)
 @ApiBearerAuth()

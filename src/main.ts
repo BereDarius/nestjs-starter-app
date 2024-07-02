@@ -3,8 +3,10 @@ import * as cookieParser from 'cookie-parser';
 import * as fs from 'fs';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { AdminModule } from './admin/admin.module';
 import { AppModule } from './app.module';
 import { AuthModule } from './auth/auth.module';
+import { HealthModule } from './health/health.module';
 import helmet from 'helmet';
 import { instance } from './logger/winston.logger';
 import { NestFactory } from '@nestjs/core';
@@ -15,15 +17,23 @@ import { WinstonModule } from 'nest-winston';
 declare const module: any;
 
 async function bootstrap() {
-  // HTTPS options
-  const httpsOptions = {
-    key: fs.readFileSync('./secrets/private-key.pem').toString(),
-    cert: fs.readFileSync('./secrets/public-certificate.pem').toString(),
-  };
+  // HTTPS setup
+  let https = true,
+    httpsOptions;
+
+  try {
+    httpsOptions = {
+      key: fs.readFileSync('secrets/private-key.pem'),
+      cert: fs.readFileSync('secrets/public-certificate.pem'),
+    };
+  } catch (error) {
+    https = false;
+
+    console.warn('HTTPS disabled: SSL certificate not found');
+  }
 
   const app = await NestFactory.create(AppModule, {
-    // HTTPS setup
-    httpsOptions,
+    httpsOptions: https ? httpsOptions : undefined,
     // Logger setup
     logger: WinstonModule.createLogger({
       instance,
@@ -77,7 +87,9 @@ async function bootstrap() {
     .addBearerAuth()
     .setLicense('MIT', 'https://opensource.org/licenses/MIT')
     .build();
-  const adminDocument = SwaggerModule.createDocument(app, adminSwaggerConfig);
+  const adminDocument = SwaggerModule.createDocument(app, adminSwaggerConfig, {
+    include: [AdminModule, HealthModule],
+  });
   SwaggerModule.setup('api/admin', app, adminDocument);
 
   // Compression setup
