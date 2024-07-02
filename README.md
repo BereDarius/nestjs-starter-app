@@ -5,12 +5,12 @@ This is a starter app for NestJS, a powerful Node.js framework. It provides auth
 ## Features
 
 - Database configuration
-- Authentication, authorization, RBAC
+- Authentication, [Authorization](#authorization), [RBAC](#rbac-role-based-access-control)
 - Security (helmet, rate limiting, CORS)
 - Health checks
 - Admin routes
 - Logging
-- Documentation (Swagger, compodoc)
+- Documentation ([Swagger](#swagger), [compodoc](#compodoc))
 - Testing (Jest)
 - Linting (ESLint, Prettier)
 
