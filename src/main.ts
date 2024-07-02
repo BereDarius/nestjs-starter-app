@@ -73,7 +73,7 @@ async function bootstrap() {
     .setDescription('Starter code for an API using NestJS')
     .setVersion('1.0')
     .addBearerAuth()
-    .setLicense('MIT', 'https://opensource.org/licenses/MIT')
+    .setLicense('MIT', 'https://github.com/BereDarius/nestjs-starter-app/blob/main/LICENSE')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig, {
     include: [AuthModule, TodosModule, UsersModule],
@@ -85,7 +85,7 @@ async function bootstrap() {
     .setDescription('Starter code for an API using NestJS')
     .setVersion('1.0')
     .addBearerAuth()
-    .setLicense('MIT', 'https://opensource.org/licenses/MIT')
+    .setLicense('MIT', 'https://github.com/BereDarius/nestjs-starter-app/blob/main/LICENSE')
     .build();
   const adminDocument = SwaggerModule.createDocument(app, adminSwaggerConfig, {
     include: [AdminModule, HealthModule],
