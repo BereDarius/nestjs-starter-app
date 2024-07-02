@@ -155,7 +155,9 @@ export class UsersController {
 
 Same as for the `@UseGuards` decorator, the `@Roles` decorator can be used at the controller level or at the method level.
 
-## Swagger
+## Documentation
+
+### Swagger
 
 In order to register a new route in Swagger, you can use the decorators provided by the `@nestjs/swagger` package.
 
