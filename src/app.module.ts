@@ -16,7 +16,7 @@ import { UsersModule } from './users/users.module';
     ThrottlerModule.forRoot([
       {
         ttl: 60000,
-        limit: 1000,
+        limit: 10,
       },
     ]),
     AppConfigModule,
