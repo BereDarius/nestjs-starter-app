@@ -1,0 +1,29 @@
+# Ignore the Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build output directory
+dist/
+
+# Ignore environment configuration files
+.env
+.env.*
+
+# Ignore any log files
+logs/
+
+# Ignore any temporary files
+*.tmp
+
+# Ignore any backup files
+*.bak
+
+# Ignore any cache directories
+.cache/
+
+# Ignore the HTTPS certificates
+secrets/

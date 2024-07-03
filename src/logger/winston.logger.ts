@@ -21,11 +21,11 @@ const prodLogger = {
   format: combine(timestamp(), errors({ stack: true }), json()),
   transports: [
     new transports.File({
-      filename: 'error.log',
+      filename: 'logs/error.log',
       level: 'error',
     }),
     new transports.File({
-      filename: 'combine.log',
+      filename: 'logs/combine.log',
       level: 'info',
     }),
   ],

@@ -2,7 +2,7 @@ import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as fs from 'fs';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { AdminModule } from './admin/admin.module';
 import { AppModule } from './app.module';
 import { AuthModule } from './auth/auth.module';
@@ -29,8 +29,6 @@ async function bootstrap() {
     };
   } catch (error) {
     https = false;
-
-    console.warn('HTTPS disabled: SSL certificate not found');
   }
 
   const app = await NestFactory.create(AppModule, {
@@ -43,6 +41,13 @@ async function bootstrap() {
 
   // Config service setup
   const configService = app.get(ConfigService);
+  const logger = app.get(Logger);
+
+  if (!https) {
+    logger.warn(
+      'HTTPS is disabled. To enable it, please provide the required SSL certificate files',
+    );
+  }
 
   // Cookie parser setup
   app.use(cookieParser());
