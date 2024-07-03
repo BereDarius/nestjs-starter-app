@@ -7,7 +7,7 @@ const appConfig: ConfigModuleOptions = {
     PORT: Joi.number().port().default(3000),
     NODE_ENV: Joi.string()
       .required()
-      .valid('development', 'production', 'test')
+      .valid('development', 'staging', 'production')
       .default('development'),
     JWT_SECRET: Joi.string().required().default('secret'),
     LOG_LEVEL: Joi.string()
