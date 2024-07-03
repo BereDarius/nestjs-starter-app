@@ -6,6 +6,7 @@ import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { AdminModule } from './admin/admin.module';
 import { AppModule } from './app.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigService } from '@nestjs/config';
 import { HealthModule } from './health/health.module';
 import helmet from 'helmet';
 import { instance } from './logger/winston.logger';
@@ -39,6 +40,9 @@ async function bootstrap() {
       instance,
     }),
   });
+
+  // Config service setup
+  const configService = app.get(ConfigService);
 
   // Cookie parser setup
   app.use(cookieParser());
@@ -99,7 +103,7 @@ async function bootstrap() {
   app.use(helmet());
 
   // Start the app
-  await app.listen(3000);
+  await app.listen(configService.get('PORT'));
 
   if (module.hot) {
     module.hot.accept();
