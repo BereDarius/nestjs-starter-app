@@ -40,7 +40,11 @@ export class TodosController {
       throw new HttpException('Not Found', HttpStatus.NOT_FOUND);
     }
 
-    if (todo.user_id !== user.id && user.role !== RoleEnum.MODERATOR) {
+    if (
+      todo.user_id !== user.id &&
+      user.role !== RoleEnum.MODERATOR &&
+      user.role !== RoleEnum.ADMIN
+    ) {
       throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
     }
 
@@ -109,9 +113,9 @@ export class TodosController {
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Unauthorized' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Not Found' })
-  async remove(@Req() request, @Param('id') id: string) {
+  async delete(@Req() request, @Param('id') id: string) {
     await this.getTodoOwnership(request, id);
 
-    return this.todosService.remove(id);
+    return this.todosService.delete(id);
   }
 }

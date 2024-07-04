@@ -25,7 +25,7 @@ export class TodosService {
     return this.todosRepository.save({ id, ...updateTodoDto });
   }
 
-  remove(id: string) {
+  delete(id: string) {
     return this.todosRepository.delete(id);
   }
 }

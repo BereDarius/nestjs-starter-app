@@ -55,7 +55,7 @@ export class AdminUsersController {
   @ApiResponse({ status: HttpStatus.OK, description: 'Users found' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden' })
   findAll(@Query() query: QueryUserDto) {
-    const where: FindOptionsWhere<Users> = query;
+    const where: FindOptionsWhere<Users> | FindOptionsWhere<Users>[] = query;
 
     return this.usersService.findAll(where);
   }
@@ -86,10 +86,10 @@ export class AdminUsersController {
   @ApiResponse({ status: HttpStatus.OK, description: 'User deleted' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
-  async remove(@Param('id') id: string) {
+  async delete(@Param('id') id: string) {
     await this.checkUserExists(id);
 
-    const result = await this.usersService.remove(id);
+    const result = await this.usersService.delete(id);
 
     return result;
   }
