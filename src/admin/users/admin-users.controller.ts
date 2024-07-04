@@ -55,7 +55,7 @@ export class AdminUsersController {
   @ApiResponse({ status: HttpStatus.OK, description: 'Users found' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden' })
   findAll(@Query() query: QueryUserDto) {
-    const where: FindOptionsWhere<Users> = query;
+    const where: FindOptionsWhere<Users> | FindOptionsWhere<Users>[] = query;
 
     return this.usersService.findAll(where);
   }

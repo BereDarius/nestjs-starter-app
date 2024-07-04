@@ -49,7 +49,7 @@ describe('AuthController', () => {
           return {
             findAll: jest.fn(where => {
               if (where[0].username === 'test') {
-                return [{ id: '1', username: 'test' }];
+                return [mockUser];
               }
               return [];
             }),
