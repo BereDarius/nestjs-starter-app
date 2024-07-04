@@ -1,4 +1,10 @@
 {
   "auto-close-tag.enableAutoCloseSelfClosingTag": false,
-  "auto-close-tag.enableAutoCloseTag": false
+  "auto-close-tag.enableAutoCloseTag": false,
+  "search.exclude": {
+    "**/.husky": true,
+    "**/dist": true,
+    "**/documentation": true,
+    "**/logs": true
+  }
 }

@@ -17,7 +17,6 @@ import { FindOptionsWhere } from 'typeorm';
 import { JwtGuard } from './guards/jwt.guard';
 import { LocalGuard } from './guards/local.guard';
 import { LoginDto } from './dto/login.dto';
-import { Request } from 'express';
 import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 import { Users } from 'src/users/entities/users.entity';
 import { UsersService } from 'src/users/users.service';
@@ -56,7 +55,7 @@ export class AuthController {
     const foundUsers = await this.usersService.findAll(where);
     const foundUser = foundUsers[0];
 
-    if (foundUser[0]) {
+    if (foundUser) {
       throw new HttpException('User already exists', HttpStatus.CONFLICT);
     }
 
@@ -66,22 +65,16 @@ export class AuthController {
   @Get('me')
   @UseGuards(JwtGuard)
   @ApiBearerAuth()
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'User found',
-  })
+  @ApiResponse({ status: HttpStatus.OK, description: 'User found' })
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Unauthorized' })
-  async me(@Req() request: Request) {
+  async me(@Req() request) {
     return request.user;
   }
 
   @Patch('me')
   @UseGuards(JwtGuard)
   @ApiBearerAuth()
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'User updated',
-  })
+  @ApiResponse({ status: HttpStatus.OK, description: 'User updated' })
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Unauthorized' })
   async update(@Req() request, @Body() updateUserDto: UpdateUserDto) {
     return this.authService.update(request.user.id, updateUserDto);
@@ -90,12 +83,9 @@ export class AuthController {
   @Delete('me')
   @UseGuards(JwtGuard)
   @ApiBearerAuth()
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'User deleted',
-  })
+  @ApiResponse({ status: HttpStatus.OK, description: 'User deleted' })
   @ApiResponse({ status: HttpStatus.UNAUTHORIZED, description: 'Unauthorized' })
   async delete(@Req() request) {
-    return this.usersService.remove(request.user.id);
+    return this.usersService.delete(request.user.id);
   }
 }

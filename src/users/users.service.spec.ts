@@ -13,7 +13,7 @@ const mockUser = {
 };
 
 describe('UsersService', () => {
-  let service: UsersService;
+  let usersService: UsersService;
   let mockRepository: Partial<Record<keyof Repository<Users>, jest.Mock>>;
 
   beforeEach(async () => {
@@ -33,18 +33,18 @@ describe('UsersService', () => {
       ],
     }).compile();
 
-    service = module.get<UsersService>(UsersService);
+    usersService = module.get<UsersService>(UsersService);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(usersService).toBeDefined();
   });
 
   describe('create', () => {
     it('should successfully insert a user', async () => {
       const createUserDto = mockUser;
       mockRepository.save.mockResolvedValue(createUserDto);
-      expect(await service.create(createUserDto)).toEqual(createUserDto);
+      expect(await usersService.create(createUserDto)).toEqual(createUserDto);
       expect(mockRepository.save).toHaveBeenCalledWith(createUserDto);
     });
   });
@@ -53,7 +53,7 @@ describe('UsersService', () => {
     it('should return an array of users', async () => {
       const usersArray = [mockUser];
       mockRepository.find.mockResolvedValue(usersArray);
-      expect(await service.findAll({})).toEqual(usersArray);
+      expect(await usersService.findAll({})).toEqual(usersArray);
       expect(mockRepository.find).toHaveBeenCalled();
     });
   });
@@ -62,7 +62,7 @@ describe('UsersService', () => {
     it('should return a single user', async () => {
       const user = mockUser;
       mockRepository.findOne.mockResolvedValue(user);
-      expect(await service.findOne('1')).toEqual(user);
+      expect(await usersService.findOne('1')).toEqual(user);
       expect(mockRepository.findOne).toHaveBeenCalledWith({ where: { id: '1' } });
     });
   });
@@ -74,7 +74,7 @@ describe('UsersService', () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...updatedUser } = user;
       mockRepository.save.mockResolvedValue(updatedUser);
-      expect(await service.update('1', updateUserDto)).toEqual(updatedUser);
+      expect(await usersService.update('1', updateUserDto)).toEqual(updatedUser);
       expect(mockRepository.save).toHaveBeenCalledWith({ id: '1', ...updateUserDto });
     });
   });

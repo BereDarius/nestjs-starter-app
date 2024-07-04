@@ -82,10 +82,10 @@ export class AdminTodosController {
   @ApiResponse({ status: HttpStatus.OK, description: 'Todo deleted' })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Todo not found' })
-  async remove(@Param('id') id: string) {
+  async delete(@Param('id') id: string) {
     await this.checkTodoExists(id);
 
-    const result = this.todosService.remove(id);
+    const result = this.todosService.delete(id);
 
     return result;
   }
