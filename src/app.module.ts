@@ -5,6 +5,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AppConfigModule } from './config/app/app-config.module';
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { AuthModule } from './auth/auth.module';
+import { ConfigService } from '@nestjs/config';
 import { DatabaseConfigModule } from './config/db/db-config.module';
 import { HealthModule } from './health/health.module';
 import { RequestLoggerMiddleware } from './middleware/request-logger.middleware';
@@ -28,6 +29,7 @@ import { UsersModule } from './users/users.module';
     AdminModule,
   ],
   providers: [
+    ConfigService,
     Logger,
     {
       provide: APP_GUARD,
@@ -38,9 +40,9 @@ import { UsersModule } from './users/users.module';
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(RequestLoggerMiddleware).forRoutes('*');
-    Logger.log('RequestLoggerMiddleware applied');
+    Logger.log('RequestLoggerMiddleware applied', 'AppModule');
 
     consumer.apply(AuthMiddleware);
-    Logger.log('AuthMiddleware applied');
+    Logger.log('AuthMiddleware applied', 'AppModule');
   }
 }
