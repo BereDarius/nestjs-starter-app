@@ -1,8 +1,9 @@
 import { createLogger, format, transports } from 'winston';
+import { Client } from '@elastic/elasticsearch';
+import { ElasticsearchTransport } from 'winston-elasticsearch';
 
 const { combine, timestamp, printf, colorize, align, errors, json } = format;
 
-// for development environment
 const devLogger = {
   level: process.env.LOG_LEVEL || 'info',
   format: combine(
@@ -16,7 +17,11 @@ const devLogger = {
   transports: [new transports.Console()],
 };
 
-// for production environment
+const esClient = new Client({ node: 'http://0.0.0.0:5044' });
+const esTransportOpts = {
+  client: esClient,
+};
+const esTransport = new ElasticsearchTransport(esTransportOpts);
 const prodLogger = {
   format: combine(timestamp(), errors({ stack: true }), json()),
   transports: [
@@ -28,6 +33,7 @@ const prodLogger = {
       filename: 'logs/combine.log',
       level: 'info',
     }),
+    esTransport,
   ],
 };
 
