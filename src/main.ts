@@ -1,6 +1,9 @@
+import './lib/sentry-instrument';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as fs from 'fs';
+import * as Sentry from '@sentry/nestjs';
+import { BaseExceptionFilter, HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { AdminModule } from './admin/admin.module';
@@ -10,7 +13,6 @@ import { ConfigService } from '@nestjs/config';
 import { HealthModule } from './health/health.module';
 import helmet from 'helmet';
 import { instance } from './logger/winston.logger';
-import { NestFactory } from '@nestjs/core';
 import { TodosModule } from './todos/todos.module';
 import { UsersModule } from './users/users.module';
 import { WinstonModule } from 'nest-winston';
@@ -75,6 +77,10 @@ async function bootstrap() {
 
   // Global prefix setup
   app.setGlobalPrefix('api');
+
+  // Sentry setup
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  Sentry.setupNestErrorHandler(app, new BaseExceptionFilter(httpAdapter));
 
   // Swagger setup
   const swaggerConfig = new DocumentBuilder()

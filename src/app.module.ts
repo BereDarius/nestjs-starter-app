@@ -8,12 +8,15 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigService } from '@nestjs/config';
 import { DatabaseConfigModule } from './config/db/db-config.module';
 import { HealthModule } from './health/health.module';
+import { MetricsMiddleware } from './middleware/metrics.middleware';
+import { MetricsModule } from './metrics/metrics.module';
 import { RequestLoggerMiddleware } from './middleware/request-logger.middleware';
 import { TodosModule } from './todos/todos.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
+    MetricsModule,
     ThrottlerModule.forRoot([
       {
         ttl: 60000,
@@ -39,6 +42,9 @@ import { UsersModule } from './users/users.module';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
+    consumer.apply(MetricsMiddleware).forRoutes('*');
+    Logger.log('MetricsMiddleware applied', 'AppModule');
+
     consumer.apply(RequestLoggerMiddleware).forRoutes('*');
     Logger.log('RequestLoggerMiddleware applied', 'AppModule');
 
